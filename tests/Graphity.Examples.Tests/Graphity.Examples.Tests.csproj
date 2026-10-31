@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    The tests of the examples: what the comments of each example claim, and that every example in
+    the XML documentation, in the package overviews, in the overview of the API documentation and in
+    the README is a region of the examples. These read the sources from the repository, which they
+    find above the test assembly.
+  -->
+  <PropertyGroup>
+    <RootNamespace>Examples.Tests</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.4" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+    <Using Include="Graphity" />
+    <ProjectReference Include="../../examples/Graphity.Examples/Graphity.Examples.csproj" />
+  </ItemGroup>
+
+</Project>

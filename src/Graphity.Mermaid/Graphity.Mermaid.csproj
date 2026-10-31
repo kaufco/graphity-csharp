@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Graphity.Mermaid</RootNamespace>
+    <PackageId>Graphity.Mermaid</PackageId>
+    <Description>Export of Graphity graphs to Mermaid flowcharts, which render in Markdown.</Description>
+    <PackageTags>graph;mermaid;markdown;visualization</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Graphity.Mermaid.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Graphity.Core/Graphity.Core.csproj" />
+  </ItemGroup>
+
+</Project>

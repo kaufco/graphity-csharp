@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Graphity.ControlFlow</RootNamespace>
+    <PackageId>Graphity.ControlFlow</PackageId>
+    <Description>Control-flow analyses on Graphity graphs: loops, dominance frontiers, control dependence and phi placement.</Description>
+    <PackageTags>graph;control-flow;loops;dominance-frontier;ssa;compiler</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Graphity.ControlFlow.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Graphity.Core/Graphity.Core.csproj" />
+  </ItemGroup>
+
+</Project>

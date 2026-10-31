@@ -1,0 +1,261 @@
+# Builds, tests and packs the packages and publishes them to NuGet: Graphity.Core,
+# Graphity.ControlFlow, Graphity.Dot, Graphity.Mermaid and Graphity.All (which brings in the
+# four), each with its symbol package except Graphity.All, which has no code. All are released at
+# the version that src/Directory.Build.props gives every package.
+#
+# One trigger, workflow_dispatch, run before the GitHub Release is published:
+# a package that NuGet rejects stops the release instead of following it. The
+# GitHub Release comes afterwards and starts only deploy-api-docs.yml. A second
+# trigger on release.published would push the same version again, which NuGet
+# rejects as a duplicate of the push this run made.
+#
+# Two inputs, because the ref that is built and the ref the workflow file comes
+# from are different things. The run always uses the workflow file of the branch
+# it is started from (normally main, so fixes to this file apply). What it
+# builds is `ref`: a tag, a branch, or a full 40-character commit SHA (a short
+# SHA is looked up as a branch or tag and fails). Left empty, it builds the tag
+# named `version`. The regular release pushes that tag to the release commit
+# first and leaves `ref` empty; the GitHub Release then picks up the existing
+# tag, so the built commit and the released one are the same by construction.
+#
+# What the job does — and where it stops: it builds, tests and packs, and keeps
+# the packages as an artifact of the run. A version pushed to NuGet can never be
+# deleted or replaced, only unlisted, and its number never used again, so the
+# push happens only when the third input, `publish`, is checked. Left unchecked
+# (the default), the run goes as far as it can without NuGet: NuGet has no dry
+# run of a push, so it stops after the pack, with the packages to inspect. A
+# release runs it that way first, then once more with `publish`.
+#
+# NuGet takes each package on its own, so a release is not all or nothing: the
+# run pushes the dependencies first and Graphity.All last, and a push that fails
+# leaves the packages before it published. Run it again with the same inputs;
+# --skip-duplicate passes over what is there already.
+#
+# The version comes from the `version` input and is checked against the
+# package metadata of the ref that is built. That check notices a ref whose
+# packages carry another version — most likely because the sync has not run
+# yet. It cannot tell two commits with the same version apart; that is what
+# building the tag is for.
+#
+# Required repository secrets:
+#   NUGET_API_KEY   an API key from nuget.org with the scope "Push new packages
+#                   and package versions" for the packages Graphity.*; needed
+#                   only for a run with `publish`
+#
+# The job is guarded with `if: github.repository == 'kaufco/graphity-csharp'` so that
+# forks never attempt a push they have no credentials for.
+
+name: Release to NuGet
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish; must match the package metadata of the ref that is built (e.g. 3.0.0)'
+        required: true
+        type: string
+      ref:
+        description: 'Tag, branch or full commit SHA to build; empty builds the tag named like the version'
+        required: false
+        type: string
+        default: ''
+      publish:
+        description: 'Push the packages to NuGet, which cannot be undone; unchecked, the run stops after the pack'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+# Never run two releases at once, and never cancel one in flight: an interrupted
+# push would leave some of the packages published and the others not.
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Pack & push to NuGet
+    if: github.repository == 'kaufco/graphity-csharp'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    env:
+      DOTNET_NOLOGO: 'true'
+      DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
+      # The packages in the order they are pushed: each after the packages it depends on.
+      PACKAGES: Graphity.Core Graphity.ControlFlow Graphity.Dot Graphity.Mermaid Graphity.All
+
+    steps:
+      - name: Determine the version and the ref to build
+        id: target
+        # Both inputs are passed through the environment rather than
+        # interpolated into the script, so neither can be read as shell syntax.
+        env:
+          INPUT_VERSION: ${{ inputs.version }}
+          INPUT_REF: ${{ inputs.ref }}
+        run: |
+          set -euo pipefail
+          # Tags are unprefixed by convention; a v-prefixed version still works.
+          version="${INPUT_VERSION#v}"
+          # Only a version that NuGet keeps as it is: no leading zeros, which NuGet
+          # drops, and no build metadata, which it leaves out of the package's name.
+          if [[ ! "$version" =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-[0-9A-Za-z.-]+)?$ ]]; then
+            echo "'$INPUT_VERSION' does not look like a release version." >&2
+            exit 1
+          fi
+          # Blank input counts as empty: actions/checkout trims it and would fall
+          # back to the dispatch branch, which is the mistake this input prevents.
+          ref="${INPUT_REF//[[:space:]]/}"
+          ref="${ref:-$version}"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "ref=$ref" >> "$GITHUB_OUTPUT"
+          echo "Packing $version, built from '$ref'."
+
+      - name: Check the API key
+        # Before the build, so that a run with `publish` does not fail at its last step.
+        if: inputs.publish
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: |
+          if [[ -z "$NUGET_API_KEY" ]]; then
+            echo "The repository secret NUGET_API_KEY is not set; a run with publish needs it." >&2
+            exit 1
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # The ref to build, not the branch the workflow file came from: the
+          # packages must be built from the release commit.
+          ref: ${{ steps.target.outputs.ref }}
+
+      - name: Set up .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Check the version of every package against the release
+        # Every project under src/ is a package. The packages take their version from
+        # src/Directory.Build.props, and each is asked for it, so that a project that sets
+        # another one is caught before the build. The list PACKAGES above must name every
+        # package, so that none is left behind when one is added.
+        env:
+          EXPECTED: ${{ steps.target.outputs.version }}
+        run: |
+          set -euo pipefail
+          found=()
+          for project in src/*/*.csproj; do
+            properties="$(dotnet msbuild "$project" -getProperty:PackageId -getProperty:Version)"
+            id="$(jq -r '.Properties.PackageId' <<<"$properties")"
+            version="$(jq -r '.Properties.Version' <<<"$properties")"
+            if [[ "$version" != "$EXPECTED" ]]; then
+              echo "$id is at $version, but this run was started for $EXPECTED." >&2
+              echo "Either the ref is not the release commit, or that commit has not been synced yet." >&2
+              exit 1
+            fi
+            found+=("$id")
+          done
+          if [[ "$(printf '%s\n' "${found[@]}" | sort)" != "$(printf '%s\n' $PACKAGES | sort)" ]]; then
+            echo "The packages under src/ are ${found[*]}, but PACKAGES in this workflow names $PACKAGES." >&2
+            exit 1
+          fi
+          echo "Packing $PACKAGES at $EXPECTED."
+
+      - name: Refuse a version that is already on NuGet
+        # A second push of a published version fails at NuGet anyway, after the build.
+        # Failing here says why, and says it before the build. Every package is asked;
+        # one that was never published answers 404. NuGet lists the versions lowercased,
+        # so the lookup is too. A version that only some of the packages have is what
+        # an interrupted run leaves behind: a run with publish pushes the rest.
+        env:
+          VERSION: ${{ steps.target.outputs.version }}
+        run: |
+          set -euo pipefail
+          published=()
+          for id in $PACKAGES; do
+            lower="${id,,}"
+            url="https://api.nuget.org/v3-flatcontainer/$lower/index.json"
+            body="$(mktemp)"
+            code="$(curl -sS -o "$body" -w '%{http_code}' --max-time 30 "$url" || echo 000)"
+            case "$code" in
+              200)
+                if jq -e --arg v "${VERSION,,}" '.versions | index($v)' "$body" >/dev/null; then
+                  published+=("$id")
+                  echo "$id $VERSION is on NuGet already."
+                else
+                  echo "$id $VERSION is not on NuGet yet."
+                fi
+                ;;
+              404) echo "$id has never been published to NuGet." ;;
+              *)   echo "Could not ask NuGet about $id (HTTP $code); continuing." ;;
+            esac
+          done
+          read -r -a all <<<"$PACKAGES"
+          if [[ "${#published[@]}" -eq "${#all[@]}" ]]; then
+            echo "Version $VERSION of every package is on NuGet. A published version cannot be replaced; release a new version instead." >&2
+            exit 1
+          fi
+          if [[ "${#published[@]}" -gt 0 ]]; then
+            echo "::warning::${published[*]} $VERSION are on NuGet already, the other packages not: a run with publish pushes the rest."
+          fi
+
+      - name: Build
+        # As in the CI: warnings are errors (Directory.Build.props), so this is the lint as well.
+        run: dotnet build -c Release
+
+      - name: Test
+        run: dotnet test -c Release --no-build
+
+      - name: Pack
+        # The build ran on GitHub Actions, so ContinuousIntegrationBuild makes the PDBs in the
+        # symbol packages deterministic, without paths of the runner. The check then finds every
+        # package and the symbol package of each one that has code.
+        env:
+          VERSION: ${{ steps.target.outputs.version }}
+        run: |
+          set -euo pipefail
+          dotnet pack -c Release --no-build -o artifacts
+          for id in $PACKAGES; do
+            test -f "artifacts/$id.$VERSION.nupkg" || { echo "artifacts/$id.$VERSION.nupkg is missing." >&2; exit 1; }
+            symbols="$(dotnet msbuild "src/$id/$id.csproj" -getProperty:IncludeSymbols)"
+            if [[ "$symbols" == "true" ]]; then
+              test -f "artifacts/$id.$VERSION.snupkg" || { echo "artifacts/$id.$VERSION.snupkg is missing." >&2; exit 1; }
+            fi
+          done
+          ls -l artifacts
+
+      - name: Keep the packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-packages-${{ steps.target.outputs.version }}
+          # Packages are zip files, which are compressed already.
+          compression-level: 0
+          path: |
+            artifacts/*.nupkg
+            artifacts/*.snupkg
+
+      - name: Push to NuGet
+        # Each package with its symbol package, which dotnet nuget push takes from the same
+        # directory; dependencies first, Graphity.All last. --skip-duplicate passes over a
+        # package that an interrupted run has pushed already.
+        if: inputs.publish
+        env:
+          VERSION: ${{ steps.target.outputs.version }}
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: |
+          set -euo pipefail
+          for id in $PACKAGES; do
+            dotnet nuget push "artifacts/$id.$VERSION.nupkg" \
+                --api-key "$NUGET_API_KEY" \
+                --source https://api.nuget.org/v3/index.json \
+                --skip-duplicate
+          done
+
+      - name: Not published
+        if: ${{ !inputs.publish }}
+        env:
+          VERSION: ${{ steps.target.outputs.version }}
+        run: |
+          echo "::notice::Packed $PACKAGES at $VERSION and kept them as an artifact of this run, without pushing them. Run this workflow again with publish checked to push them to NuGet."

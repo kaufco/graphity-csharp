@@ -1,0 +1,25 @@
+# Build output
+bin/
+obj/
+artifacts/
+
+# Test results
+TestResults/
+*.trx
+coverage*.xml
+
+# IDE
+.vs/
+.idea/
+.vscode/
+*.user
+*.suo
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# The API documentation that DocFX builds from docs/ (its metadata goes to docs/obj/)
+docs/api/

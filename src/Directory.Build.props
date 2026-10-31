@@ -1,0 +1,33 @@
+<Project>
+
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+
+  <!-- The packages: one per module, all released together at the same version. -->
+  <PropertyGroup>
+    <!-- The version of the Java library whose API the packages implement. -->
+    <Version>3.0.0</Version>
+    <Authors>Marco Kaufmann</Authors>
+    <Copyright>Copyright 2025-2026 Marco Kaufmann</Copyright>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/kaufco/graphity-csharp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/kaufco/graphity-csharp</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <!-- Each package shows its PACKAGE.md as its readme on NuGet: the overview of its namespace, or,
+         for Graphity.All, of the packages it brings in. -->
+    <PackageReadmeFile>PACKAGE.md</PackageReadmeFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IsAotCompatible>true</IsAotCompatible>
+    <!-- The PDBs go into a symbol package beside each package, for stepping into the library and
+         for line numbers in stack traces; built in CI, they carry no paths of the build machine. -->
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(MSBuildProjectDirectory)/PACKAGE.md" Pack="true" PackagePath="/" />
+    <None Include="$(MSBuildThisFileDirectory)../LICENSE" Pack="true" PackagePath="/" Visible="false" />
+    <None Include="$(MSBuildThisFileDirectory)../NOTICE" Pack="true" PackagePath="/" Visible="false" />
+  </ItemGroup>
+
+</Project>

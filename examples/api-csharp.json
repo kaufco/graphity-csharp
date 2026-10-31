@@ -1,0 +1,1402 @@
+{
+  "about": "The C# counterparts of the Java API references of the guide Solving Graph Problems with Graphity (https://github.com/kaufco/graphity-doc), which links every name of the Java API to the API documentation of the language a reader picks. One entry per public or protected type, constructor and method of the four published Java modules, keyed by its declaration as java-refs.txt lists them: 'name' is the name in C#, 'url' its page and anchor relative to the root of the API documentation (docRoot when built here, https://kaufco.github.io/graphity-csharp/ when published), and 'note' what a reader of the Java text would not expect. Where C# keeps Java's overloads of a method as several overloads of one name, 'signature' is the name with the parameter list of the overload, without the return type, as the API documentation shows it, so that the guide can tell them apart; Java's overloads that are one method in C# keep the plain name and share its url. Where C# has no counterpart, 'name' and 'url' are null and 'reason' says why. ApiMappingTests in tests/Graphity.Examples.Tests checks the entries, and every url and signature against the API documentation when it is built.",
+  "docRoot": "docs/api",
+  "docCommand": "dotnet tool restore && dotnet docfx docs/docfx.json --warningsAsErrors",
+  "refs": {
+    "Ancestry": {
+      "name": "Ancestry",
+      "url": "api/Graphity.Ancestry.html"
+    },
+    "Ancestry.of(Graph)": {
+      "name": "Ancestry.Of",
+      "signature": "Ancestry.Of(Graph)",
+      "url": "api/Graphity.Ancestry.html#Graphity_Ancestry_Of_Graphity_Graph_"
+    },
+    "Ancestry.of(Dominators)": {
+      "name": "Ancestry.Of",
+      "signature": "Ancestry.Of(Dominators)",
+      "url": "api/Graphity.Ancestry.html#Graphity_Ancestry_Of_Graphity_Dominators_"
+    },
+    "Ancestry.lowestCommonAncestorOf(int, int)": {
+      "name": "Ancestry.LowestCommonAncestorOf",
+      "url": "api/Graphity.Ancestry.html#Graphity_Ancestry_LowestCommonAncestorOf_System_Int32_System_Int32_"
+    },
+    "Ancestry.isAncestorOf(int, int)": {
+      "name": "Ancestry.IsAncestorOf",
+      "url": "api/Graphity.Ancestry.html#Graphity_Ancestry_IsAncestorOf_System_Int32_System_Int32_"
+    },
+    "Ancestry.depthOf(int)": {
+      "name": "Ancestry.DepthOf",
+      "url": "api/Graphity.Ancestry.html#Graphity_Ancestry_DepthOf_System_Int32_"
+    },
+    "Ancestry.parentOf(int)": {
+      "name": "Ancestry.ParentOf",
+      "url": "api/Graphity.Ancestry.html#Graphity_Ancestry_ParentOf_System_Int32_"
+    },
+    "BackEdges": {
+      "name": "BackEdges",
+      "url": "api/Graphity.BackEdges.html",
+      "note": "A static class, as Java's has only static methods."
+    },
+    "BackEdges.of(Graph)": {
+      "name": "BackEdges.Of",
+      "url": "api/Graphity.BackEdges.html#Graphity_BackEdges_Of_Graphity_Graph_"
+    },
+    "BfsDistances": {
+      "name": "BfsDistances",
+      "url": "api/Graphity.BfsDistances.html"
+    },
+    "BfsDistances.of(Graph, int)": {
+      "name": "BfsDistances.Of",
+      "signature": "BfsDistances.Of(Graph, int)",
+      "url": "api/Graphity.BfsDistances.html#Graphity_BfsDistances_Of_Graphity_Graph_System_Int32_"
+    },
+    "BfsDistances.of(Graph, IntList)": {
+      "name": "BfsDistances.Of",
+      "signature": "BfsDistances.Of(Graph, ReadOnlySpan<int>)",
+      "url": "api/Graphity.BfsDistances.html#Graphity_BfsDistances_Of_Graphity_Graph_System_ReadOnlySpan_System_Int32__",
+      "note": "Takes a ReadOnlySpan<int>: an array, a SortedIntView or a collection expression passes as it is, an ImmutableArray<int> result with .AsSpan()."
+    },
+    "BfsDistances.distanceOf(int)": {
+      "name": "BfsDistances.DistanceOf",
+      "url": "api/Graphity.BfsDistances.html#Graphity_BfsDistances_DistanceOf_System_Int32_"
+    },
+    "BfsDistances.isReachable(int)": {
+      "name": "BfsDistances.IsReachable",
+      "url": "api/Graphity.BfsDistances.html#Graphity_BfsDistances_IsReachable_System_Int32_"
+    },
+    "BfsDistances.pathTo(int)": {
+      "name": "BfsDistances.PathTo",
+      "url": "api/Graphity.BfsDistances.html#Graphity_BfsDistances_PathTo_System_Int32_",
+      "note": "Returns an ImmutableArray<int>, the .NET form of an unmodifiable IntList; it compares by reference, and passes on to a span parameter with .AsSpan()."
+    },
+    "BfsDistances.maxDistance()": {
+      "name": "BfsDistances.MaxDistance",
+      "url": "api/Graphity.BfsDistances.html#Graphity_BfsDistances_MaxDistance",
+      "note": "A property, read without parentheses."
+    },
+    "BiAdjacentGraph": {
+      "name": "BiAdjacentGraph",
+      "url": "api/Graphity.BiAdjacentGraph.html"
+    },
+    "BiAdjacentGraph.of(Graph)": {
+      "name": "BiAdjacentGraph.Of",
+      "url": "api/Graphity.BiAdjacentGraph.html#Graphity_BiAdjacentGraph_Of_Graphity_Graph_"
+    },
+    "BiAdjacentGraph.inDegree(int)": {
+      "name": "BiAdjacentGraph.InDegree",
+      "url": "api/Graphity.BiAdjacentGraph.html#Graphity_BiAdjacentGraph_InDegree_System_Int32_"
+    },
+    "BiAdjacentGraph.inNodes(int)": {
+      "name": "BiAdjacentGraph.InNodes",
+      "url": "api/Graphity.BiAdjacentGraph.html#Graphity_BiAdjacentGraph_InNodes_System_Int32_"
+    },
+    "BiAdjacentGraph.hasInNode(int, int)": {
+      "name": "BiAdjacentGraph.HasInNode",
+      "url": "api/Graphity.BiAdjacentGraph.html#Graphity_BiAdjacentGraph_HasInNode_System_Int32_System_Int32_"
+    },
+    "BiAdjacentGraph.uniAdjacentGraph()": {
+      "name": "BiAdjacentGraph.UniAdjacentGraph",
+      "url": "api/Graphity.BiAdjacentGraph.html#Graphity_BiAdjacentGraph_UniAdjacentGraph"
+    },
+    "BiAdjacentGraph.transposed()": {
+      "name": "BiAdjacentGraph.Transposed",
+      "url": "api/Graphity.BiAdjacentGraph.html#Graphity_BiAdjacentGraph_Transposed"
+    },
+    "BiAdjacentGraph.transposedEdgeIndex(int)": {
+      "name": "BiAdjacentGraph.TransposedEdgeIndex",
+      "url": "api/Graphity.BiAdjacentGraph.html#Graphity_BiAdjacentGraph_TransposedEdgeIndex_System_Int32_"
+    },
+    "BiAdjacentGraph.degree(int)": {
+      "name": "BiAdjacentGraph.Degree",
+      "url": "api/Graphity.BiAdjacentGraph.html#Graphity_BiAdjacentGraph_Degree_System_Int32_"
+    },
+    "BiAdjacentGraph.neighbors(int)": {
+      "name": "BiAdjacentGraph.Neighbors",
+      "url": "api/Graphity.BiAdjacentGraph.html#Graphity_BiAdjacentGraph_Neighbors_System_Int32_"
+    },
+    "BiAdjacentGraph.hasNeighbor(int, int)": {
+      "name": "BiAdjacentGraph.HasNeighbor",
+      "url": "api/Graphity.BiAdjacentGraph.html#Graphity_BiAdjacentGraph_HasNeighbor_System_Int32_System_Int32_"
+    },
+    "BiAdjacentGraph.isRootNode(int)": {
+      "name": "BiAdjacentGraph.IsRootNode",
+      "url": "api/Graphity.BiAdjacentGraph.html#Graphity_BiAdjacentGraph_IsRootNode_System_Int32_"
+    },
+    "Biconnectivity": {
+      "name": "Biconnectivity",
+      "url": "api/Graphity.Biconnectivity.html"
+    },
+    "Biconnectivity.bridges()": {
+      "name": "Biconnectivity.Bridges",
+      "url": "api/Graphity.Biconnectivity.html#Graphity_Biconnectivity_Bridges",
+      "note": "A property, read without parentheses."
+    },
+    "Biconnectivity.articulationPoints()": {
+      "name": "Biconnectivity.ArticulationPoints",
+      "url": "api/Graphity.Biconnectivity.html#Graphity_Biconnectivity_ArticulationPoints",
+      "note": "A property, read without parentheses."
+    },
+    "Biconnectivity.blocks()": {
+      "name": "Biconnectivity.Blocks",
+      "url": "api/Graphity.Biconnectivity.html#Graphity_Biconnectivity_Blocks",
+      "note": "A property, read without parentheses."
+    },
+    "Components": {
+      "name": "Components",
+      "url": "api/Graphity.Components.html",
+      "note": "A static class, as Java's has only static methods."
+    },
+    "Components.sccsOf(Graph)": {
+      "name": "Components.SccsOf",
+      "url": "api/Graphity.Components.html#Graphity_Components_SccsOf_Graphity_Graph_"
+    },
+    "Components.wccsOf(Graph)": {
+      "name": "Components.WccsOf",
+      "url": "api/Graphity.Components.html#Graphity_Components_WccsOf_Graphity_Graph_"
+    },
+    "Components.ccsOf(Graph)": {
+      "name": "Components.CcsOf",
+      "url": "api/Graphity.Components.html#Graphity_Components_CcsOf_Graphity_Graph_"
+    },
+    "Components.biconnectivityOf(BiAdjacentGraph)": {
+      "name": "Components.BiconnectivityOf",
+      "url": "api/Graphity.Components.html#Graphity_Components_BiconnectivityOf_Graphity_BiAdjacentGraph_"
+    },
+    "Components.strongConnectivityOf(BiAdjacentGraph)": {
+      "name": "Components.StrongConnectivityOf",
+      "url": "api/Graphity.Components.html#Graphity_Components_StrongConnectivityOf_Graphity_BiAdjacentGraph_"
+    },
+    "Csr": {
+      "name": "Csr",
+      "url": "api/Graphity.Csr.html",
+      "note": "A static class; its methods return ReadOnlySpan<int> in place of the arrays, so the compiler enforces Java's rule that they must not be modified."
+    },
+    "Csr.outAdjacencyStart(Graph)": {
+      "name": "Csr.OutAdjacencyStart",
+      "url": "api/Graphity.Csr.html#Graphity_Csr_OutAdjacencyStart_Graphity_Graph_",
+      "note": "Returns a ReadOnlySpan<int> over the array of the graph, in place of the array itself: the compiler keeps it from being written; copy it with ToArray() to keep it beyond a method."
+    },
+    "Csr.outAdjacency(Graph)": {
+      "name": "Csr.OutAdjacency",
+      "url": "api/Graphity.Csr.html#Graphity_Csr_OutAdjacency_Graphity_Graph_",
+      "note": "Returns a ReadOnlySpan<int> over the array of the graph, in place of the array itself: the compiler keeps it from being written; copy it with ToArray() to keep it beyond a method."
+    },
+    "Csr.inAdjacencyStart(BiAdjacentGraph)": {
+      "name": "Csr.InAdjacencyStart",
+      "url": "api/Graphity.Csr.html#Graphity_Csr_InAdjacencyStart_Graphity_BiAdjacentGraph_",
+      "note": "Returns a ReadOnlySpan<int> over the array of the graph, in place of the array itself: the compiler keeps it from being written; copy it with ToArray() to keep it beyond a method."
+    },
+    "Csr.inAdjacency(BiAdjacentGraph)": {
+      "name": "Csr.InAdjacency",
+      "url": "api/Graphity.Csr.html#Graphity_Csr_InAdjacency_Graphity_BiAdjacentGraph_",
+      "note": "Returns a ReadOnlySpan<int> over the array of the graph, in place of the array itself: the compiler keeps it from being written; copy it with ToArray() to keep it beyond a method."
+    },
+    "DfsEdgeTraverser": {
+      "name": "DfsEdgeTraverser",
+      "url": "api/Graphity.DfsEdgeTraverser.html"
+    },
+    "DfsEdgeTraverser(Graph)": {
+      "name": "new DfsEdgeTraverser",
+      "url": "api/Graphity.DfsEdgeTraverser.html#Graphity_DfsEdgeTraverser__ctor_Graphity_Graph_",
+      "note": "The protected constructor: a subclass calls it with base(graph)."
+    },
+    "DfsEdgeTraverser.enterNode(int)": {
+      "name": "DfsEdgeTraverser.EnterNode",
+      "url": "api/Graphity.DfsEdgeTraverser.html#Graphity_DfsEdgeTraverser_EnterNode_System_Int32_"
+    },
+    "DfsEdgeTraverser.leaveNode(int)": {
+      "name": "DfsEdgeTraverser.LeaveNode",
+      "url": "api/Graphity.DfsEdgeTraverser.html#Graphity_DfsEdgeTraverser_LeaveNode_System_Int32_"
+    },
+    "DfsEdgeTraverser.visitEdge(int, int, int, TargetState)": {
+      "name": "DfsEdgeTraverser.VisitEdge",
+      "url": "api/Graphity.DfsEdgeTraverser.html#Graphity_DfsEdgeTraverser_VisitEdge_System_Int32_System_Int32_System_Int32_Graphity_DfsEdgeTraverser_TargetState_"
+    },
+    "DfsEdgeTraverser.isVisited(int)": {
+      "name": "DfsEdgeTraverser.IsVisited",
+      "url": "api/Graphity.DfsEdgeTraverser.html#Graphity_DfsEdgeTraverser_IsVisited_System_Int32_"
+    },
+    "DfsEdgeTraverser.isOnStack(int)": {
+      "name": "DfsEdgeTraverser.IsOnStack",
+      "url": "api/Graphity.DfsEdgeTraverser.html#Graphity_DfsEdgeTraverser_IsOnStack_System_Int32_"
+    },
+    "DfsEdgeTraverser.stop()": {
+      "name": "DfsEdgeTraverser.Stop",
+      "url": "api/Graphity.DfsEdgeTraverser.html#Graphity_DfsEdgeTraverser_Stop"
+    },
+    "DfsEdgeTraverser.run()": {
+      "name": "DfsEdgeTraverser.Run",
+      "signature": "DfsEdgeTraverser.Run()",
+      "url": "api/Graphity.DfsEdgeTraverser.html#Graphity_DfsEdgeTraverser_Run"
+    },
+    "DfsEdgeTraverser.run(int)": {
+      "name": "DfsEdgeTraverser.Run",
+      "signature": "DfsEdgeTraverser.Run(int)",
+      "url": "api/Graphity.DfsEdgeTraverser.html#Graphity_DfsEdgeTraverser_Run_System_Int32_"
+    },
+    "DfsEdgeTraverser.run(IntList)": {
+      "name": "DfsEdgeTraverser.Run",
+      "signature": "DfsEdgeTraverser.Run(ReadOnlySpan<int>)",
+      "url": "api/Graphity.DfsEdgeTraverser.html#Graphity_DfsEdgeTraverser_Run_System_ReadOnlySpan_System_Int32__",
+      "note": "Takes a ReadOnlySpan<int>: an array, a SortedIntView or a collection expression passes as it is, an ImmutableArray<int> result with .AsSpan()."
+    },
+    "DfsEdgeTraverser.TargetState": {
+      "name": "DfsEdgeTraverser.TargetState",
+      "url": "api/Graphity.DfsEdgeTraverser.TargetState.html",
+      "note": "An enum nested as in Java, its members in PascalCase: OnStack for ON_STACK."
+    },
+    "DfsEdgeTraverser.EdgeAction": {
+      "name": "DfsEdgeTraverser.EdgeAction",
+      "url": "api/Graphity.DfsEdgeTraverser.EdgeAction.html",
+      "note": "An enum nested as in Java, its members in PascalCase: Descend for DESCEND."
+    },
+    "DfsTraverser": {
+      "name": "DfsTraverser",
+      "url": "api/Graphity.DfsTraverser.html"
+    },
+    "DfsTraverser(Graph)": {
+      "name": "new DfsTraverser",
+      "url": "api/Graphity.DfsTraverser.html#Graphity_DfsTraverser__ctor_Graphity_Graph_",
+      "note": "The protected constructor: a subclass calls it with base(graph)."
+    },
+    "DfsTraverser.enterNode(int)": {
+      "name": "DfsTraverser.EnterNode",
+      "url": "api/Graphity.DfsTraverser.html#Graphity_DfsTraverser_EnterNode_System_Int32_"
+    },
+    "DfsTraverser.leaveNode(int)": {
+      "name": "DfsTraverser.LeaveNode",
+      "url": "api/Graphity.DfsTraverser.html#Graphity_DfsTraverser_LeaveNode_System_Int32_"
+    },
+    "DfsTraverser.isVisited(int)": {
+      "name": "DfsTraverser.IsVisited",
+      "url": "api/Graphity.DfsTraverser.html#Graphity_DfsTraverser_IsVisited_System_Int32_"
+    },
+    "DfsTraverser.isOnStack(int)": {
+      "name": "DfsTraverser.IsOnStack",
+      "url": "api/Graphity.DfsTraverser.html#Graphity_DfsTraverser_IsOnStack_System_Int32_"
+    },
+    "DfsTraverser.stop()": {
+      "name": "DfsTraverser.Stop",
+      "url": "api/Graphity.DfsTraverser.html#Graphity_DfsTraverser_Stop"
+    },
+    "DfsTraverser.run()": {
+      "name": "DfsTraverser.Run",
+      "signature": "DfsTraverser.Run()",
+      "url": "api/Graphity.DfsTraverser.html#Graphity_DfsTraverser_Run"
+    },
+    "DfsTraverser.run(int)": {
+      "name": "DfsTraverser.Run",
+      "signature": "DfsTraverser.Run(int)",
+      "url": "api/Graphity.DfsTraverser.html#Graphity_DfsTraverser_Run_System_Int32_"
+    },
+    "DfsTraverser.run(IntList)": {
+      "name": "DfsTraverser.Run",
+      "signature": "DfsTraverser.Run(ReadOnlySpan<int>)",
+      "url": "api/Graphity.DfsTraverser.html#Graphity_DfsTraverser_Run_System_ReadOnlySpan_System_Int32__",
+      "note": "Takes a ReadOnlySpan<int>: an array, a SortedIntView or a collection expression passes as it is, an ImmutableArray<int> result with .AsSpan()."
+    },
+    "Dominators": {
+      "name": "Dominators",
+      "url": "api/Graphity.Dominators.html"
+    },
+    "Dominators.of(BiAdjacentGraph, int)": {
+      "name": "Dominators.Of",
+      "signature": "Dominators.Of(BiAdjacentGraph, int)",
+      "url": "api/Graphity.Dominators.html#Graphity_Dominators_Of_Graphity_BiAdjacentGraph_System_Int32_"
+    },
+    "Dominators.of(BiAdjacentGraph, IntList)": {
+      "name": "Dominators.Of",
+      "signature": "Dominators.Of(BiAdjacentGraph, ReadOnlySpan<int>)",
+      "url": "api/Graphity.Dominators.html#Graphity_Dominators_Of_Graphity_BiAdjacentGraph_System_ReadOnlySpan_System_Int32__",
+      "note": "Takes a ReadOnlySpan<int>: an array, a SortedIntView or a collection expression passes as it is, an ImmutableArray<int> result with .AsSpan()."
+    },
+    "Dominators.graph()": {
+      "name": "Dominators.Graph",
+      "url": "api/Graphity.Dominators.html#Graphity_Dominators_Graph",
+      "note": "A property, read without parentheses."
+    },
+    "Dominators.immediateDominatorOf(int)": {
+      "name": "Dominators.ImmediateDominatorOf",
+      "url": "api/Graphity.Dominators.html#Graphity_Dominators_ImmediateDominatorOf_System_Int32_"
+    },
+    "Dominators.isReachable(int)": {
+      "name": "Dominators.IsReachable",
+      "url": "api/Graphity.Dominators.html#Graphity_Dominators_IsReachable_System_Int32_"
+    },
+    "EdgeConsumer": {
+      "name": "EdgeConsumer",
+      "url": "api/Graphity.EdgeConsumer.html",
+      "note": "A delegate in place of the functional interface; a lambda passes as in Java."
+    },
+    "EdgeConsumer.accept(int, int, int)": {
+      "name": "EdgeConsumer",
+      "url": "api/Graphity.EdgeConsumer.html",
+      "note": "The delegate itself: a call of the delegate, consumer(source, target, edgeIndex), takes the place of accept."
+    },
+    "EdgeMapping": {
+      "name": "EdgeMapping",
+      "url": "api/Graphity.EdgeMapping.html"
+    },
+    "EdgeMapping.inverted(int)": {
+      "name": "EdgeMapping.Inverted",
+      "url": "api/Graphity.EdgeMapping.html#Graphity_EdgeMapping_Inverted_System_Int32_"
+    },
+    "EdgeMapping.compose(EdgeMapping)": {
+      "name": "EdgeMapping.Compose",
+      "url": "api/Graphity.EdgeMapping.html#Graphity_EdgeMapping_Compose_Graphity_EdgeMapping_"
+    },
+    "EdgeMapping.gather(int[])": {
+      "name": "EdgeMapping.Gather",
+      "signature": "EdgeMapping.Gather<T>(ReadOnlySpan<T>)",
+      "url": "api/Graphity.EdgeMapping.html#Graphity_EdgeMapping_Gather__1_System_ReadOnlySpan___0__",
+      "note": "One generic method for Java's overloads for int[], long[] and double[], for any unmanaged value type, such as int, long and double; an index that is not mapped gets default, Java's 0."
+    },
+    "EdgeMapping.gather(long[])": {
+      "name": "EdgeMapping.Gather",
+      "signature": "EdgeMapping.Gather<T>(ReadOnlySpan<T>)",
+      "url": "api/Graphity.EdgeMapping.html#Graphity_EdgeMapping_Gather__1_System_ReadOnlySpan___0__",
+      "note": "One generic method for Java's overloads for int[], long[] and double[], for any unmanaged value type, such as int, long and double; an index that is not mapped gets default, Java's 0."
+    },
+    "EdgeMapping.gather(double[])": {
+      "name": "EdgeMapping.Gather",
+      "signature": "EdgeMapping.Gather<T>(ReadOnlySpan<T>)",
+      "url": "api/Graphity.EdgeMapping.html#Graphity_EdgeMapping_Gather__1_System_ReadOnlySpan___0__",
+      "note": "One generic method for Java's overloads for int[], long[] and double[], for any unmanaged value type, such as int, long and double; an index that is not mapped gets default, Java's 0."
+    },
+    "EdgeMapping.gather(T[], T[])": {
+      "name": "EdgeMapping.Gather",
+      "signature": "EdgeMapping.Gather<T>(ReadOnlySpan<T>, Span<T>)",
+      "url": "api/Graphity.EdgeMapping.html#Graphity_EdgeMapping_Gather__1_System_ReadOnlySpan___0__System_Span___0__",
+      "note": "Writes into a span of the caller, for any type, as Java's writes into the array passed; an index that is not mapped keeps its value."
+    },
+    "EdgePartition": {
+      "name": "EdgePartition",
+      "url": "api/Graphity.EdgePartition.html"
+    },
+    "EdgePartition.edgeCount()": {
+      "name": "EdgePartition.EdgeCount",
+      "url": "api/Graphity.EdgePartition.html#Graphity_EdgePartition_EdgeCount",
+      "note": "A property, read without parentheses."
+    },
+    "EdgePartition.edgesOf(int)": {
+      "name": "EdgePartition.EdgesOf",
+      "url": "api/Graphity.EdgePartition.html#Graphity_EdgePartition_EdgesOf_System_Int32_"
+    },
+    "EdgeType": {
+      "name": "EdgeType",
+      "url": "api/Graphity.EdgeType.html",
+      "note": "Its members in PascalCase: Tree, Back, Forward, Cross for TREE, BACK, FORWARD, CROSS."
+    },
+    "EdgeTypes": {
+      "name": "EdgeTypes",
+      "url": "api/Graphity.EdgeTypes.html"
+    },
+    "EdgeTypes.of(Graph)": {
+      "name": "EdgeTypes.Of",
+      "url": "api/Graphity.EdgeTypes.html#Graphity_EdgeTypes_Of_Graphity_Graph_"
+    },
+    "EdgeTypes.typeOf(int)": {
+      "name": "EdgeTypes.TypeOf",
+      "url": "api/Graphity.EdgeTypes.html#Graphity_EdgeTypes_TypeOf_System_Int32_"
+    },
+    "Edges": {
+      "name": "Edges",
+      "url": "api/Graphity.Edges.html"
+    },
+    "Edges.of(EdgeTypes, EdgeType)": {
+      "name": "Edges.Of",
+      "url": "api/Graphity.Edges.html#Graphity_Edges_Of_Graphity_EdgeTypes_Graphity_EdgeType_"
+    },
+    "Edges.sourceNodes()": {
+      "name": "Edges.SourceNodes",
+      "url": "api/Graphity.Edges.html#Graphity_Edges_SourceNodes",
+      "note": "A property, read without parentheses. An ImmutableArray<int>, the .NET form of an unmodifiable IntList; it compares by reference, and passes on to a span parameter with .AsSpan()."
+    },
+    "Edges.targetNodes()": {
+      "name": "Edges.TargetNodes",
+      "url": "api/Graphity.Edges.html#Graphity_Edges_TargetNodes",
+      "note": "A property, read without parentheses. An ImmutableArray<int>, the .NET form of an unmodifiable IntList; it compares by reference, and passes on to a span parameter with .AsSpan()."
+    },
+    "Edges.edgeIndices()": {
+      "name": "Edges.EdgeIndices",
+      "url": "api/Graphity.Edges.html#Graphity_Edges_EdgeIndices",
+      "note": "A property, read without parentheses. An ImmutableArray<int>, the .NET form of an unmodifiable IntList; it compares by reference, and passes on to a span parameter with .AsSpan()."
+    },
+    "Edges.count()": {
+      "name": "Edges.Count",
+      "url": "api/Graphity.Edges.html#Graphity_Edges_Count",
+      "note": "A property, read without parentheses."
+    },
+    "Edges.isEmpty()": {
+      "name": "Edges.IsEmpty",
+      "url": "api/Graphity.Edges.html#Graphity_Edges_IsEmpty",
+      "note": "A property, read without parentheses."
+    },
+    "FrontierTraverser": {
+      "name": "FrontierTraverser",
+      "url": "api/Graphity.FrontierTraverser.html"
+    },
+    "FrontierTraverser(Graph)": {
+      "name": "new FrontierTraverser",
+      "url": "api/Graphity.FrontierTraverser.html#Graphity_FrontierTraverser__ctor_Graphity_Graph_",
+      "note": "The protected constructor: a subclass calls it with base(graph)."
+    },
+    "FrontierTraverser.visitNode(int)": {
+      "name": "FrontierTraverser.VisitNode",
+      "url": "api/Graphity.FrontierTraverser.html#Graphity_FrontierTraverser_VisitNode_System_Int32_"
+    },
+    "FrontierTraverser.enqueueChildren(int)": {
+      "name": "FrontierTraverser.EnqueueChildren",
+      "url": "api/Graphity.FrontierTraverser.html#Graphity_FrontierTraverser_EnqueueChildren_System_Int32_"
+    },
+    "FrontierTraverser.enqueue(int)": {
+      "name": "FrontierTraverser.Enqueue",
+      "url": "api/Graphity.FrontierTraverser.html#Graphity_FrontierTraverser_Enqueue_System_Int32_"
+    },
+    "FrontierTraverser.isVisited(int)": {
+      "name": "FrontierTraverser.IsVisited",
+      "url": "api/Graphity.FrontierTraverser.html#Graphity_FrontierTraverser_IsVisited_System_Int32_"
+    },
+    "FrontierTraverser.currentLevel()": {
+      "name": "FrontierTraverser.CurrentLevel",
+      "url": "api/Graphity.FrontierTraverser.html#Graphity_FrontierTraverser_CurrentLevel",
+      "note": "A protected property, read without parentheses."
+    },
+    "FrontierTraverser.leaveLevel(int)": {
+      "name": "FrontierTraverser.LeaveLevel",
+      "url": "api/Graphity.FrontierTraverser.html#Graphity_FrontierTraverser_LeaveLevel_System_Int32_"
+    },
+    "FrontierTraverser.stop()": {
+      "name": "FrontierTraverser.Stop",
+      "url": "api/Graphity.FrontierTraverser.html#Graphity_FrontierTraverser_Stop"
+    },
+    "FrontierTraverser.run()": {
+      "name": "FrontierTraverser.Run",
+      "signature": "FrontierTraverser.Run()",
+      "url": "api/Graphity.FrontierTraverser.html#Graphity_FrontierTraverser_Run"
+    },
+    "FrontierTraverser.run(int)": {
+      "name": "FrontierTraverser.Run",
+      "signature": "FrontierTraverser.Run(int)",
+      "url": "api/Graphity.FrontierTraverser.html#Graphity_FrontierTraverser_Run_System_Int32_"
+    },
+    "FrontierTraverser.run(IntList)": {
+      "name": "FrontierTraverser.Run",
+      "signature": "FrontierTraverser.Run(ReadOnlySpan<int>)",
+      "url": "api/Graphity.FrontierTraverser.html#Graphity_FrontierTraverser_Run_System_ReadOnlySpan_System_Int32__",
+      "note": "Takes a ReadOnlySpan<int>: an array, a SortedIntView or a collection expression passes as it is, an ImmutableArray<int> result with .AsSpan()."
+    },
+    "Graph": {
+      "name": "Graph",
+      "url": "api/Graphity.Graph.html"
+    },
+    "Graph.of(int[], int[])": {
+      "name": "Graph.Of",
+      "url": "api/Graphity.Graph.html#Graphity_Graph_Of_System_ReadOnlySpan_System_Int32__System_ReadOnlySpan_System_Int32__",
+      "note": "Takes two ReadOnlySpan<int>; arrays pass as they are, and are copied as in Java."
+    },
+    "Graph.writeTo(OutputStream)": {
+      "name": "Graph.WriteTo",
+      "url": "api/Graphity.Graph.html#Graphity_Graph_WriteTo_System_IO_Stream_",
+      "note": "Writes to a Stream, in place of an OutputStream, in the same format."
+    },
+    "Graph.readFrom(InputStream)": {
+      "name": "Graph.ReadFrom",
+      "url": "api/Graphity.Graph.html#Graphity_Graph_ReadFrom_System_IO_Stream_",
+      "note": "Reads from a Stream, in place of an InputStream; it throws InvalidDataException and EndOfStreamException where Java throws IOException and EOFException."
+    },
+    "Graph.nodeCount()": {
+      "name": "Graph.NodeCount",
+      "url": "api/Graphity.Graph.html#Graphity_Graph_NodeCount",
+      "note": "A property, read without parentheses."
+    },
+    "Graph.edgeCount()": {
+      "name": "Graph.EdgeCount",
+      "url": "api/Graphity.Graph.html#Graphity_Graph_EdgeCount",
+      "note": "A property, read without parentheses."
+    },
+    "Graph.isEmpty()": {
+      "name": "Graph.IsEmpty",
+      "url": "api/Graphity.Graph.html#Graphity_Graph_IsEmpty",
+      "note": "A property, read without parentheses."
+    },
+    "Graph.outDegree(int)": {
+      "name": "Graph.OutDegree",
+      "url": "api/Graphity.Graph.html#Graphity_Graph_OutDegree_System_Int32_"
+    },
+    "Graph.outNodes(int)": {
+      "name": "Graph.OutNodes",
+      "url": "api/Graphity.Graph.html#Graphity_Graph_OutNodes_System_Int32_"
+    },
+    "Graph.outEdgeStart(int)": {
+      "name": "Graph.OutEdgeStart",
+      "url": "api/Graphity.Graph.html#Graphity_Graph_OutEdgeStart_System_Int32_"
+    },
+    "Graph.outEdgeEnd(int)": {
+      "name": "Graph.OutEdgeEnd",
+      "url": "api/Graphity.Graph.html#Graphity_Graph_OutEdgeEnd_System_Int32_"
+    },
+    "Graph.nodes()": {
+      "name": "Graph.Nodes",
+      "url": "api/Graphity.Graph.html#Graphity_Graph_Nodes",
+      "note": "Returns an IEnumerable<int> of the node IDs, in place of an IntStream: foreach or LINQ take the place of the stream operations."
+    },
+    "Graph.forEachEdge(EdgeConsumer)": {
+      "name": "Graph.ForEachEdge",
+      "url": "api/Graphity.Graph.html#Graphity_Graph_ForEachEdge_Graphity_EdgeConsumer_",
+      "note": "Takes the delegate EdgeConsumer, a lambda as in Java."
+    },
+    "Graph.edgeTarget(int)": {
+      "name": "Graph.EdgeTarget",
+      "url": "api/Graphity.Graph.html#Graphity_Graph_EdgeTarget_System_Int32_"
+    },
+    "Graph.edgeSource(int)": {
+      "name": "Graph.EdgeSource",
+      "url": "api/Graphity.Graph.html#Graphity_Graph_EdgeSource_System_Int32_"
+    },
+    "Graph.hasOutNode(int, int)": {
+      "name": "Graph.HasOutNode",
+      "url": "api/Graphity.Graph.html#Graphity_Graph_HasOutNode_System_Int32_System_Int32_"
+    },
+    "Graph.edgeIndexOf(int, int)": {
+      "name": "Graph.EdgeIndexOf",
+      "url": "api/Graphity.Graph.html#Graphity_Graph_EdgeIndexOf_System_Int32_System_Int32_"
+    },
+    "Graph.containsSelfLoop(int)": {
+      "name": "Graph.ContainsSelfLoop",
+      "url": "api/Graphity.Graph.html#Graphity_Graph_ContainsSelfLoop_System_Int32_"
+    },
+    "Graph.uniAdjacentGraph()": {
+      "name": "Graph.UniAdjacentGraph",
+      "url": "api/Graphity.Graph.html#Graphity_Graph_UniAdjacentGraph"
+    },
+    "Graph.equals(Object)": {
+      "name": "Graph.Equals",
+      "url": "api/Graphity.Graph.html#Graphity_Graph_Equals_System_Object_",
+      "note": "Also Equals(Graph), of IEquatable<Graph>; == still compares references."
+    },
+    "Graph.hashCode()": {
+      "name": "Graph.GetHashCode",
+      "url": "api/Graphity.Graph.html#Graphity_Graph_GetHashCode",
+      "note": "Java's formula; unlike Graphs.TopologyHash, its value is no promise."
+    },
+    "Graph.toString()": {
+      "name": "Graph.ToString",
+      "url": "api/Graphity.Graph.html#Graphity_Graph_ToString"
+    },
+    "GraphBuilder": {
+      "name": "GraphBuilder",
+      "url": "api/Graphity.GraphBuilder.html"
+    },
+    "GraphBuilder()": {
+      "name": "new GraphBuilder",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder__ctor"
+    },
+    "GraphBuilder.ensureEdgeCapacity(int)": {
+      "name": "GraphBuilder.EnsureEdgeCapacity",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_EnsureEdgeCapacity_System_Int32_"
+    },
+    "GraphBuilder.addNode()": {
+      "name": "GraphBuilder.AddNode",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_AddNode"
+    },
+    "GraphBuilder.addNodes(int)": {
+      "name": "GraphBuilder.AddNodes",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_AddNodes_System_Int32_"
+    },
+    "GraphBuilder.addChild(int)": {
+      "name": "GraphBuilder.AddChild",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_AddChild_System_Int32_"
+    },
+    "GraphBuilder.addChildren(int, int)": {
+      "name": "GraphBuilder.AddChildren",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_AddChildren_System_Int32_System_Int32_"
+    },
+    "GraphBuilder.addParent(int)": {
+      "name": "GraphBuilder.AddParent",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_AddParent_System_Int32_"
+    },
+    "GraphBuilder.addParents(int, int)": {
+      "name": "GraphBuilder.AddParents",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_AddParents_System_Int32_System_Int32_"
+    },
+    "GraphBuilder.addEdge(int, int)": {
+      "name": "GraphBuilder.AddEdge",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_AddEdge_System_Int32_System_Int32_"
+    },
+    "GraphBuilder.addEdgeAndNodes(int, int)": {
+      "name": "GraphBuilder.AddEdgeAndNodes",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_AddEdgeAndNodes_System_Int32_System_Int32_"
+    },
+    "GraphBuilder.addOutEdges(int, IntList)": {
+      "name": "GraphBuilder.AddOutEdges",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_AddOutEdges_System_Int32_System_ReadOnlySpan_System_Int32__",
+      "note": "One method for Java's overloads with an IntList and with int...: a params ReadOnlySpan<int> takes loose arguments, an array, a SortedIntView or a collection expression; an ImmutableArray<int> result passes with .AsSpan()."
+    },
+    "GraphBuilder.addOutEdgesAndNodes(int, IntList)": {
+      "name": "GraphBuilder.AddOutEdgesAndNodes",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_AddOutEdgesAndNodes_System_Int32_System_ReadOnlySpan_System_Int32__",
+      "note": "One method for Java's overloads with an IntList and with int...: a params ReadOnlySpan<int> takes loose arguments, an array, a SortedIntView or a collection expression; an ImmutableArray<int> result passes with .AsSpan()."
+    },
+    "GraphBuilder.addOutEdges(int, int...)": {
+      "name": "GraphBuilder.AddOutEdges",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_AddOutEdges_System_Int32_System_ReadOnlySpan_System_Int32__",
+      "note": "One method for Java's overloads with an IntList and with int...: a params ReadOnlySpan<int> takes loose arguments, an array, a SortedIntView or a collection expression; an ImmutableArray<int> result passes with .AsSpan()."
+    },
+    "GraphBuilder.addOutEdgesAndNodes(int, int...)": {
+      "name": "GraphBuilder.AddOutEdgesAndNodes",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_AddOutEdgesAndNodes_System_Int32_System_ReadOnlySpan_System_Int32__",
+      "note": "One method for Java's overloads with an IntList and with int...: a params ReadOnlySpan<int> takes loose arguments, an array, a SortedIntView or a collection expression; an ImmutableArray<int> result passes with .AsSpan()."
+    },
+    "GraphBuilder.addInEdges(int, IntList)": {
+      "name": "GraphBuilder.AddInEdges",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_AddInEdges_System_Int32_System_ReadOnlySpan_System_Int32__",
+      "note": "One method for Java's overloads with an IntList and with int...: a params ReadOnlySpan<int> takes loose arguments, an array, a SortedIntView or a collection expression; an ImmutableArray<int> result passes with .AsSpan()."
+    },
+    "GraphBuilder.addInEdgesAndNodes(int, IntList)": {
+      "name": "GraphBuilder.AddInEdgesAndNodes",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_AddInEdgesAndNodes_System_Int32_System_ReadOnlySpan_System_Int32__",
+      "note": "One method for Java's overloads with an IntList and with int...: a params ReadOnlySpan<int> takes loose arguments, an array, a SortedIntView or a collection expression; an ImmutableArray<int> result passes with .AsSpan()."
+    },
+    "GraphBuilder.addInEdges(int, int...)": {
+      "name": "GraphBuilder.AddInEdges",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_AddInEdges_System_Int32_System_ReadOnlySpan_System_Int32__",
+      "note": "One method for Java's overloads with an IntList and with int...: a params ReadOnlySpan<int> takes loose arguments, an array, a SortedIntView or a collection expression; an ImmutableArray<int> result passes with .AsSpan()."
+    },
+    "GraphBuilder.addInEdgesAndNodes(int, int...)": {
+      "name": "GraphBuilder.AddInEdgesAndNodes",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_AddInEdgesAndNodes_System_Int32_System_ReadOnlySpan_System_Int32__",
+      "note": "One method for Java's overloads with an IntList and with int...: a params ReadOnlySpan<int> takes loose arguments, an array, a SortedIntView or a collection expression; an ImmutableArray<int> result passes with .AsSpan()."
+    },
+    "GraphBuilder.addPath(IntList)": {
+      "name": "GraphBuilder.AddPath",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_AddPath_System_ReadOnlySpan_System_Int32__",
+      "note": "One method for Java's overloads with an IntList and with int...: a params ReadOnlySpan<int> takes loose arguments, an array, a SortedIntView or a collection expression; an ImmutableArray<int> result passes with .AsSpan()."
+    },
+    "GraphBuilder.addPathAndNodes(IntList)": {
+      "name": "GraphBuilder.AddPathAndNodes",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_AddPathAndNodes_System_ReadOnlySpan_System_Int32__",
+      "note": "One method for Java's overloads with an IntList and with int...: a params ReadOnlySpan<int> takes loose arguments, an array, a SortedIntView or a collection expression; an ImmutableArray<int> result passes with .AsSpan()."
+    },
+    "GraphBuilder.addPath(int...)": {
+      "name": "GraphBuilder.AddPath",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_AddPath_System_ReadOnlySpan_System_Int32__",
+      "note": "One method for Java's overloads with an IntList and with int...: a params ReadOnlySpan<int> takes loose arguments, an array, a SortedIntView or a collection expression; an ImmutableArray<int> result passes with .AsSpan()."
+    },
+    "GraphBuilder.addPathAndNodes(int...)": {
+      "name": "GraphBuilder.AddPathAndNodes",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_AddPathAndNodes_System_ReadOnlySpan_System_Int32__",
+      "note": "One method for Java's overloads with an IntList and with int...: a params ReadOnlySpan<int> takes loose arguments, an array, a SortedIntView or a collection expression; an ImmutableArray<int> result passes with .AsSpan()."
+    },
+    "GraphBuilder.addEdgePairs(int...)": {
+      "name": "GraphBuilder.AddEdgePairs",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_AddEdgePairs_System_ReadOnlySpan_System_Int32__",
+      "note": "A params ReadOnlySpan<int>: loose arguments, an array or a collection expression."
+    },
+    "GraphBuilder.addEdgePairsAndNodes(int...)": {
+      "name": "GraphBuilder.AddEdgePairsAndNodes",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_AddEdgePairsAndNodes_System_ReadOnlySpan_System_Int32__",
+      "note": "A params ReadOnlySpan<int>: loose arguments, an array or a collection expression."
+    },
+    "GraphBuilder.addEdges(Edges)": {
+      "name": "GraphBuilder.AddEdges",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_AddEdges_Graphity_Edges_"
+    },
+    "GraphBuilder.addEdgesAndNodes(Edges)": {
+      "name": "GraphBuilder.AddEdgesAndNodes",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_AddEdgesAndNodes_Graphity_Edges_"
+    },
+    "GraphBuilder.addGraph(Graph)": {
+      "name": "GraphBuilder.AddGraph",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_AddGraph_Graphity_Graph_"
+    },
+    "GraphBuilder.build()": {
+      "name": "GraphBuilder.Build",
+      "url": "api/Graphity.GraphBuilder.html#Graphity_GraphBuilder_Build"
+    },
+    "GraphDiff": {
+      "name": "GraphDiff",
+      "url": "api/Graphity.GraphDiff.html"
+    },
+    "GraphDiff.addedEdges()": {
+      "name": "GraphDiff.AddedEdges",
+      "url": "api/Graphity.GraphDiff.html#Graphity_GraphDiff_AddedEdges",
+      "note": "A property, read without parentheses."
+    },
+    "GraphDiff.removedEdges()": {
+      "name": "GraphDiff.RemovedEdges",
+      "url": "api/Graphity.GraphDiff.html#Graphity_GraphDiff_RemovedEdges",
+      "note": "A property, read without parentheses."
+    },
+    "GraphDiff.isEmpty()": {
+      "name": "GraphDiff.IsEmpty",
+      "url": "api/Graphity.GraphDiff.html#Graphity_GraphDiff_IsEmpty",
+      "note": "A property, read without parentheses."
+    },
+    "GraphDiff.toString()": {
+      "name": "GraphDiff.ToString",
+      "url": "api/Graphity.GraphDiff.html#Graphity_GraphDiff_ToString"
+    },
+    "Graphs": {
+      "name": "Graphs",
+      "url": "api/Graphity.Graphs.html",
+      "note": "A static class, as Java's has only static methods."
+    },
+    "Graphs.remapped(Graph, NodeMapping)": {
+      "name": "Graphs.Remapped",
+      "url": "api/Graphity.Graphs.html#Graphity_Graphs_Remapped_Graphity_Graph_Graphity_NodeMapping_"
+    },
+    "Graphs.dominatorTree(Dominators)": {
+      "name": "Graphs.DominatorTree",
+      "url": "api/Graphity.Graphs.html#Graphity_Graphs_DominatorTree_Graphity_Dominators_"
+    },
+    "Graphs.transitiveClosure(Graph)": {
+      "name": "Graphs.TransitiveClosure",
+      "url": "api/Graphity.Graphs.html#Graphity_Graphs_TransitiveClosure_Graphity_Graph_"
+    },
+    "Graphs.transitiveReduction(Graph)": {
+      "name": "Graphs.TransitiveReduction",
+      "url": "api/Graphity.Graphs.html#Graphity_Graphs_TransitiveReduction_Graphity_Graph_"
+    },
+    "Graphs.edgeMapping(Graph, Graph, NodeMapping)": {
+      "name": "Graphs.EdgeMapping",
+      "url": "api/Graphity.Graphs.html#Graphity_Graphs_EdgeMapping_Graphity_Graph_Graphity_Graph_Graphity_NodeMapping_"
+    },
+    "Graphs.transposedEdgeMapping(Graph)": {
+      "name": "Graphs.TransposedEdgeMapping",
+      "url": "api/Graphity.Graphs.html#Graphity_Graphs_TransposedEdgeMapping_Graphity_Graph_"
+    },
+    "Graphs.edgePartition(Graph, NodePartition)": {
+      "name": "Graphs.EdgePartition",
+      "url": "api/Graphity.Graphs.html#Graphity_Graphs_EdgePartition_Graphity_Graph_Graphity_NodePartition_"
+    },
+    "Graphs.rootNodes(BiAdjacentGraph)": {
+      "name": "Graphs.RootNodes",
+      "url": "api/Graphity.Graphs.html#Graphity_Graphs_RootNodes_Graphity_BiAdjacentGraph_"
+    },
+    "Graphs.reachableFrom(Graph, int)": {
+      "name": "Graphs.ReachableFrom",
+      "signature": "Graphs.ReachableFrom(Graph, int)",
+      "url": "api/Graphity.Graphs.html#Graphity_Graphs_ReachableFrom_Graphity_Graph_System_Int32_"
+    },
+    "Graphs.reachableFrom(Graph, IntList)": {
+      "name": "Graphs.ReachableFrom",
+      "signature": "Graphs.ReachableFrom(Graph, ReadOnlySpan<int>)",
+      "url": "api/Graphity.Graphs.html#Graphity_Graphs_ReachableFrom_Graphity_Graph_System_ReadOnlySpan_System_Int32__",
+      "note": "Takes a ReadOnlySpan<int>: an array, a SortedIntView or a collection expression passes as it is, an ImmutableArray<int> result with .AsSpan()."
+    },
+    "Graphs.isDag(Graph)": {
+      "name": "Graphs.IsDag",
+      "url": "api/Graphity.Graphs.html#Graphity_Graphs_IsDag_Graphity_Graph_"
+    },
+    "Graphs.findCycle(Graph)": {
+      "name": "Graphs.FindCycle",
+      "url": "api/Graphity.Graphs.html#Graphity_Graphs_FindCycle_Graphity_Graph_",
+      "note": "Returns an ImmutableArray<int>, the .NET form of an unmodifiable IntList; it compares by reference, and passes on to a span parameter with .AsSpan()."
+    },
+    "Graphs.isForest(Graph)": {
+      "name": "Graphs.IsForest",
+      "url": "api/Graphity.Graphs.html#Graphity_Graphs_IsForest_Graphity_Graph_"
+    },
+    "Graphs.isTree(Graph)": {
+      "name": "Graphs.IsTree",
+      "url": "api/Graphity.Graphs.html#Graphity_Graphs_IsTree_Graphity_Graph_"
+    },
+    "Graphs.isPath(Graph)": {
+      "name": "Graphs.IsPath",
+      "url": "api/Graphity.Graphs.html#Graphity_Graphs_IsPath_Graphity_Graph_"
+    },
+    "Graphs.isStronglyConnected(Graph)": {
+      "name": "Graphs.IsStronglyConnected",
+      "url": "api/Graphity.Graphs.html#Graphity_Graphs_IsStronglyConnected_Graphity_Graph_"
+    },
+    "Graphs.isBipartite(Graph)": {
+      "name": "Graphs.IsBipartite",
+      "url": "api/Graphity.Graphs.html#Graphity_Graphs_IsBipartite_Graphity_Graph_"
+    },
+    "Graphs.isUndirectedTree(Graph)": {
+      "name": "Graphs.IsUndirectedTree",
+      "url": "api/Graphity.Graphs.html#Graphity_Graphs_IsUndirectedTree_Graphity_Graph_"
+    },
+    "Graphs.isUndirectedForest(Graph)": {
+      "name": "Graphs.IsUndirectedForest",
+      "url": "api/Graphity.Graphs.html#Graphity_Graphs_IsUndirectedForest_Graphity_Graph_"
+    },
+    "Graphs.isWeaklyConnected(Graph)": {
+      "name": "Graphs.IsWeaklyConnected",
+      "url": "api/Graphity.Graphs.html#Graphity_Graphs_IsWeaklyConnected_Graphity_Graph_"
+    },
+    "Graphs.adjacencyListOf(Graph)": {
+      "name": "Graphs.AdjacencyListOf",
+      "url": "api/Graphity.Graphs.html#Graphity_Graphs_AdjacencyListOf_Graphity_Graph_"
+    },
+    "Graphs.topologyHash(Graph)": {
+      "name": "Graphs.TopologyHash",
+      "url": "api/Graphity.Graphs.html#Graphity_Graphs_TopologyHash_Graphity_Graph_"
+    },
+    "Graphs.diff(Graph, Graph)": {
+      "name": "Graphs.Diff",
+      "url": "api/Graphity.Graphs.html#Graphity_Graphs_Diff_Graphity_Graph_Graphity_Graph_"
+    },
+    "IndexMapping": {
+      "name": "IndexMapping",
+      "url": "api/Graphity.IndexMapping.html"
+    },
+    "IndexMapping.get(int)": {
+      "name": "IndexMapping.Get",
+      "url": "api/Graphity.IndexMapping.html#Graphity_IndexMapping_Get_System_Int32_"
+    },
+    "IndexMapping.isMapped(int)": {
+      "name": "IndexMapping.IsMapped",
+      "url": "api/Graphity.IndexMapping.html#Graphity_IndexMapping_IsMapped_System_Int32_"
+    },
+    "IndexMapping.isPartial()": {
+      "name": "IndexMapping.IsPartial",
+      "url": "api/Graphity.IndexMapping.html#Graphity_IndexMapping_IsPartial",
+      "note": "A property, read without parentheses."
+    },
+    "IndexMapping.mappedCount()": {
+      "name": "IndexMapping.MappedCount",
+      "url": "api/Graphity.IndexMapping.html#Graphity_IndexMapping_MappedCount",
+      "note": "A property, read without parentheses."
+    },
+    "IndexMapping.indexCount()": {
+      "name": "IndexMapping.IndexCount",
+      "url": "api/Graphity.IndexMapping.html#Graphity_IndexMapping_IndexCount",
+      "note": "A property, read without parentheses."
+    },
+    "IndexPartition": {
+      "name": "IndexPartition",
+      "url": "api/Graphity.IndexPartition.html"
+    },
+    "IndexPartition.groupCount()": {
+      "name": "IndexPartition.GroupCount",
+      "url": "api/Graphity.IndexPartition.html#Graphity_IndexPartition_GroupCount",
+      "note": "A property, read without parentheses."
+    },
+    "IndexPartition.indicesOf(int)": {
+      "name": "IndexPartition.IndicesOf",
+      "url": "api/Graphity.IndexPartition.html#Graphity_IndexPartition_IndicesOf_System_Int32_"
+    },
+    "IndexPartition.sizeOf(int)": {
+      "name": "IndexPartition.SizeOf",
+      "url": "api/Graphity.IndexPartition.html#Graphity_IndexPartition_SizeOf_System_Int32_"
+    },
+    "IndexPartition.reduce(int[], int, IntBinaryOperator)": {
+      "name": "IndexPartition.Reduce",
+      "signature": "IndexPartition.Reduce<T>(ReadOnlySpan<T>, T, Func<T, T, T>)",
+      "url": "api/Graphity.IndexPartition.html#Graphity_IndexPartition_Reduce__1_System_ReadOnlySpan___0____0_System_Func___0___0___0__",
+      "note": "One generic method for Java's overloads for int[], long[] and double[], for any type; the operator is a Func<T, T, T>, a lambda as in Java."
+    },
+    "IndexPartition.reduce(long[], long, LongBinaryOperator)": {
+      "name": "IndexPartition.Reduce",
+      "signature": "IndexPartition.Reduce<T>(ReadOnlySpan<T>, T, Func<T, T, T>)",
+      "url": "api/Graphity.IndexPartition.html#Graphity_IndexPartition_Reduce__1_System_ReadOnlySpan___0____0_System_Func___0___0___0__",
+      "note": "One generic method for Java's overloads for int[], long[] and double[], for any type; the operator is a Func<T, T, T>, a lambda as in Java."
+    },
+    "IndexPartition.reduce(double[], double, DoubleBinaryOperator)": {
+      "name": "IndexPartition.Reduce",
+      "signature": "IndexPartition.Reduce<T>(ReadOnlySpan<T>, T, Func<T, T, T>)",
+      "url": "api/Graphity.IndexPartition.html#Graphity_IndexPartition_Reduce__1_System_ReadOnlySpan___0____0_System_Func___0___0___0__",
+      "note": "One generic method for Java's overloads for int[], long[] and double[], for any type; the operator is a Func<T, T, T>, a lambda as in Java."
+    },
+    "IndexPartition.reduce(T[], T[], BinaryOperator)": {
+      "name": "IndexPartition.Reduce",
+      "signature": "IndexPartition.Reduce<T>(ReadOnlySpan<T>, Span<T>, Func<T, T, T>)",
+      "url": "api/Graphity.IndexPartition.html#Graphity_IndexPartition_Reduce__1_System_ReadOnlySpan___0__System_Span___0__System_Func___0___0___0__",
+      "note": "Writes into a span of the caller, for any type, as Java's writes into the array passed; the operator is a Func<T, T, T>."
+    },
+    "NodeMapping": {
+      "name": "NodeMapping",
+      "url": "api/Graphity.NodeMapping.html"
+    },
+    "NodeMapping.of(int[])": {
+      "name": "NodeMapping.Of",
+      "url": "api/Graphity.NodeMapping.html#Graphity_NodeMapping_Of_System_ReadOnlySpan_System_Int32__"
+    },
+    "NodeMapping.forSubgraph(BitSet)": {
+      "name": "NodeMapping.ForSubgraph",
+      "signature": "NodeMapping.ForSubgraph(BitArray)",
+      "url": "api/Graphity.NodeMapping.html#Graphity_NodeMapping_ForSubgraph_System_Collections_BitArray_",
+      "note": "Takes a BitArray in place of a BitSet: its length is fixed, and the method takes time in it rather than in the highest set bit."
+    },
+    "NodeMapping.forSubgraph(IntList)": {
+      "name": "NodeMapping.ForSubgraph",
+      "signature": "NodeMapping.ForSubgraph(SortedIntView)",
+      "url": "api/Graphity.NodeMapping.html#Graphity_NodeMapping_ForSubgraph_Graphity_SortedIntView_",
+      "note": "Takes a SortedIntView as it is, as Java takes one; any other list goes to the params ReadOnlySpan<int> overload, which sorts it in a copy."
+    },
+    "NodeMapping.forSubgraph(int...)": {
+      "name": "NodeMapping.ForSubgraph",
+      "signature": "NodeMapping.ForSubgraph(params ReadOnlySpan<int>)",
+      "url": "api/Graphity.NodeMapping.html#Graphity_NodeMapping_ForSubgraph_System_ReadOnlySpan_System_Int32__",
+      "note": "A params ReadOnlySpan<int>: loose arguments, an array, a collection expression, or an ImmutableArray<int> with .AsSpan(); sorted in a copy."
+    },
+    "NodeMapping.forPermutation(IntList)": {
+      "name": "NodeMapping.ForPermutation",
+      "url": "api/Graphity.NodeMapping.html#Graphity_NodeMapping_ForPermutation_System_ReadOnlySpan_System_Int32__",
+      "note": "Takes a ReadOnlySpan<int>: the ImmutableArray<int> of TopOrder.Of passes with .AsSpan(), as in NodeMapping.ForPermutation(TopOrder.Of(dag).AsSpan())."
+    },
+    "NodeMapping.inverted(int)": {
+      "name": "NodeMapping.Inverted",
+      "url": "api/Graphity.NodeMapping.html#Graphity_NodeMapping_Inverted_System_Int32_"
+    },
+    "NodeMapping.compose(NodeMapping)": {
+      "name": "NodeMapping.Compose",
+      "url": "api/Graphity.NodeMapping.html#Graphity_NodeMapping_Compose_Graphity_NodeMapping_"
+    },
+    "NodeMapping.gather(int[])": {
+      "name": "NodeMapping.Gather",
+      "signature": "NodeMapping.Gather<T>(ReadOnlySpan<T>)",
+      "url": "api/Graphity.NodeMapping.html#Graphity_NodeMapping_Gather__1_System_ReadOnlySpan___0__",
+      "note": "One generic method for Java's overloads for int[], long[] and double[], for any unmanaged value type, such as int, long and double; an index that is not mapped gets default, Java's 0."
+    },
+    "NodeMapping.gather(long[])": {
+      "name": "NodeMapping.Gather",
+      "signature": "NodeMapping.Gather<T>(ReadOnlySpan<T>)",
+      "url": "api/Graphity.NodeMapping.html#Graphity_NodeMapping_Gather__1_System_ReadOnlySpan___0__",
+      "note": "One generic method for Java's overloads for int[], long[] and double[], for any unmanaged value type, such as int, long and double; an index that is not mapped gets default, Java's 0."
+    },
+    "NodeMapping.gather(double[])": {
+      "name": "NodeMapping.Gather",
+      "signature": "NodeMapping.Gather<T>(ReadOnlySpan<T>)",
+      "url": "api/Graphity.NodeMapping.html#Graphity_NodeMapping_Gather__1_System_ReadOnlySpan___0__",
+      "note": "One generic method for Java's overloads for int[], long[] and double[], for any unmanaged value type, such as int, long and double; an index that is not mapped gets default, Java's 0."
+    },
+    "NodeMapping.gather(T[], T[])": {
+      "name": "NodeMapping.Gather",
+      "signature": "NodeMapping.Gather<T>(ReadOnlySpan<T>, Span<T>)",
+      "url": "api/Graphity.NodeMapping.html#Graphity_NodeMapping_Gather__1_System_ReadOnlySpan___0__System_Span___0__",
+      "note": "Writes into a span of the caller, for any type, as Java's writes into the array passed; an index that is not mapped keeps its value."
+    },
+    "NodeMapping.reindex(Graph)": {
+      "name": "NodeMapping.Reindex",
+      "url": "api/Graphity.NodeMapping.html#Graphity_NodeMapping_Reindex_Graphity_Graph_"
+    },
+    "NodePartition": {
+      "name": "NodePartition",
+      "url": "api/Graphity.NodePartition.html"
+    },
+    "NodePartition.of(Graph, int[], int)": {
+      "name": "NodePartition.Of",
+      "url": "api/Graphity.NodePartition.html#Graphity_NodePartition_Of_Graphity_Graph_System_ReadOnlySpan_System_Int32__System_Int32_"
+    },
+    "NodePartition.nodeCount()": {
+      "name": "NodePartition.NodeCount",
+      "url": "api/Graphity.NodePartition.html#Graphity_NodePartition_NodeCount",
+      "note": "A property, read without parentheses."
+    },
+    "NodePartition.nodesOf(int)": {
+      "name": "NodePartition.NodesOf",
+      "url": "api/Graphity.NodePartition.html#Graphity_NodePartition_NodesOf_System_Int32_"
+    },
+    "NodePartition.condense()": {
+      "name": "NodePartition.Condense",
+      "url": "api/Graphity.NodePartition.html#Graphity_NodePartition_Condense"
+    },
+    "PreorderAncestry": {
+      "name": "PreorderAncestry",
+      "url": "api/Graphity.PreorderAncestry.html"
+    },
+    "PreorderAncestry.of(Ancestry)": {
+      "name": "PreorderAncestry.Of",
+      "url": "api/Graphity.PreorderAncestry.html#Graphity_PreorderAncestry_Of_Graphity_Ancestry_"
+    },
+    "PreorderAncestry.isAncestorOf(int, int)": {
+      "name": "PreorderAncestry.IsAncestorOf",
+      "url": "api/Graphity.PreorderAncestry.html#Graphity_PreorderAncestry_IsAncestorOf_System_Int32_System_Int32_"
+    },
+    "PreorderAncestry.subtreeSizeOf(int)": {
+      "name": "PreorderAncestry.SubtreeSizeOf",
+      "url": "api/Graphity.PreorderAncestry.html#Graphity_PreorderAncestry_SubtreeSizeOf_System_Int32_"
+    },
+    "PreorderAncestry.subtreeOf(int)": {
+      "name": "PreorderAncestry.SubtreeOf",
+      "url": "api/Graphity.PreorderAncestry.html#Graphity_PreorderAncestry_SubtreeOf_System_Int32_",
+      "note": "Returns a ReadOnlySpan<int> over the shared array, in place of a view as an IntList: the compiler keeps it from being written; it cannot be kept in a field, so copy it with ToArray() to keep it."
+    },
+    "PreorderAncestry.preorder()": {
+      "name": "PreorderAncestry.Preorder",
+      "url": "api/Graphity.PreorderAncestry.html#Graphity_PreorderAncestry_Preorder",
+      "note": "A property, read without parentheses. An ImmutableArray<int>, the .NET form of an unmodifiable IntList; it compares by reference, and passes on to a span parameter with .AsSpan()."
+    },
+    "PreorderAncestry.preorderIndexOf(int)": {
+      "name": "PreorderAncestry.PreorderIndexOf",
+      "url": "api/Graphity.PreorderAncestry.html#Graphity_PreorderAncestry_PreorderIndexOf_System_Int32_"
+    },
+    "Sccs": {
+      "name": "Sccs",
+      "url": "api/Graphity.Sccs.html"
+    },
+    "Sccs.sccOf(int)": {
+      "name": "Sccs.SccOf",
+      "url": "api/Graphity.Sccs.html#Graphity_Sccs_SccOf_System_Int32_"
+    },
+    "Sccs.sccCount()": {
+      "name": "Sccs.SccCount",
+      "url": "api/Graphity.Sccs.html#Graphity_Sccs_SccCount",
+      "note": "A property, read without parentheses."
+    },
+    "Sccs.containsCycle(int)": {
+      "name": "Sccs.ContainsCycle",
+      "url": "api/Graphity.Sccs.html#Graphity_Sccs_ContainsCycle_System_Int32_"
+    },
+    "Sccs.isStronglyConnected()": {
+      "name": "Sccs.IsStronglyConnected",
+      "url": "api/Graphity.Sccs.html#Graphity_Sccs_IsStronglyConnected",
+      "note": "A property, read without parentheses."
+    },
+    "SortedIntView": {
+      "name": "SortedIntView",
+      "url": "api/Graphity.SortedIntView.html",
+      "note": "A readonly struct, not a list class: an IReadOnlyList<int> that converts to ReadOnlySpan<int> on its own, at no cost."
+    },
+    "SortedIntView.getInt(int)": {
+      "name": "SortedIntView.this[int]",
+      "url": "api/Graphity.SortedIntView.html#Graphity_SortedIntView_Item_System_Int32_",
+      "note": "The indexer: view[i]."
+    },
+    "SortedIntView.size()": {
+      "name": "SortedIntView.Count",
+      "url": "api/Graphity.SortedIntView.html#Graphity_SortedIntView_Count",
+      "note": "A property, read without parentheses, named Count as in every .NET collection."
+    },
+    "SortedIntView.first()": {
+      "name": "SortedIntView.First",
+      "url": "api/Graphity.SortedIntView.html#Graphity_SortedIntView_First"
+    },
+    "SortedIntView.last()": {
+      "name": "SortedIntView.Last",
+      "url": "api/Graphity.SortedIntView.html#Graphity_SortedIntView_Last"
+    },
+    "SortedIntView.indexOf(int)": {
+      "name": "SortedIntView.IndexOf",
+      "url": "api/Graphity.SortedIntView.html#Graphity_SortedIntView_IndexOf_System_Int32_"
+    },
+    "SortedIntView.lastIndexOf(int)": {
+      "name": "SortedIntView.LastIndexOf",
+      "url": "api/Graphity.SortedIntView.html#Graphity_SortedIntView_LastIndexOf_System_Int32_"
+    },
+    "SortedIntView.toIntArray()": {
+      "name": "SortedIntView.ToArray",
+      "url": "api/Graphity.SortedIntView.html#Graphity_SortedIntView_ToArray",
+      "note": "Named ToArray, as in .NET."
+    },
+    "SortedIntView.toArray(int[])": {
+      "name": "SortedIntView.CopyTo",
+      "url": "api/Graphity.SortedIntView.html#Graphity_SortedIntView_CopyTo_System_Span_System_Int32__",
+      "note": "Copies into a span of the caller and throws ArgumentException if it is too short, where Java allocates a new array then; ToArray() allocates one."
+    },
+    "SortedIntView.getElements(int, int[], int, int)": {
+      "name": "SortedIntView.CopyTo",
+      "url": "api/Graphity.SortedIntView.html#Graphity_SortedIntView_CopyTo_System_Span_System_Int32__",
+      "note": "Slice and CopyTo take the place of getElements: view.Slice(from, length).CopyTo(dest.AsSpan(offset))."
+    },
+    "SortedIntView.forEach(IntConsumer)": {
+      "name": "SortedIntView.GetEnumerator",
+      "url": "api/Graphity.SortedIntView.html#Graphity_SortedIntView_GetEnumerator",
+      "note": "foreach (int value in view) takes the place of forEach; it runs over a struct enumerator that allocates nothing."
+    },
+    "SortedIntView.listIterator(int)": {
+      "name": null,
+      "url": null,
+      "reason": ".NET has no list iterator, which moves both ways from a position. A SortedIntView is indexed with view[i], and enumerated from a position with foreach over view[index..]."
+    },
+    "SortedIntView.spliterator()": {
+      "name": null,
+      "url": null,
+      "reason": ".NET has no spliterators and no streams to split for. A SortedIntView converts to ReadOnlySpan<int>, which Slice cuts into parts without a copy, and is an IEnumerable<int> for LINQ and PLINQ."
+    },
+    "SortedIntView.subList(int, int)": {
+      "name": "SortedIntView.Slice",
+      "url": "api/Graphity.SortedIntView.html#Graphity_SortedIntView_Slice_System_Int32_System_Int32_",
+      "note": "Takes a start and a length, as Slice does throughout .NET, where Java's subList takes the indices from and to: view.Slice(from, to - from), or view[from..to]."
+    },
+    "SortedIntView.viewOf(int[], int, int)": {
+      "name": "SortedIntView.ViewOf",
+      "url": "api/Graphity.SortedIntView.html#Graphity_SortedIntView_ViewOf_System_Int32___System_Int32_System_Int32_"
+    },
+    "SortedIntView.equals(Object)": {
+      "name": "SortedIntView.Equals",
+      "url": "api/Graphity.SortedIntView.html#Graphity_SortedIntView_Equals_System_Object_",
+      "note": "Also Equals(SortedIntView), == and !=; equality holds between views only, so compare with other sequences through AsSpan().SequenceEqual(...)."
+    },
+    "SortedIntView.hashCode()": {
+      "name": "SortedIntView.GetHashCode",
+      "url": "api/Graphity.SortedIntView.html#Graphity_SortedIntView_GetHashCode",
+      "note": "Java's list hash code."
+    },
+    "SortedIntView.union(SortedIntView)": {
+      "name": "SortedIntView.Union",
+      "url": "api/Graphity.SortedIntView.html#Graphity_SortedIntView_Union_Graphity_SortedIntView_"
+    },
+    "StrongConnectivity": {
+      "name": "StrongConnectivity",
+      "url": "api/Graphity.StrongConnectivity.html"
+    },
+    "StrongConnectivity.strongBridges()": {
+      "name": "StrongConnectivity.StrongBridges",
+      "url": "api/Graphity.StrongConnectivity.html#Graphity_StrongConnectivity_StrongBridges",
+      "note": "A property, read without parentheses."
+    },
+    "StrongConnectivity.strongArticulationPoints()": {
+      "name": "StrongConnectivity.StrongArticulationPoints",
+      "url": "api/Graphity.StrongConnectivity.html#Graphity_StrongConnectivity_StrongArticulationPoints",
+      "note": "A property, read without parentheses."
+    },
+    "TopOrder": {
+      "name": "TopOrder",
+      "url": "api/Graphity.TopOrder.html",
+      "note": "A static class, as Java's has only static methods."
+    },
+    "TopOrder.of(Graph)": {
+      "name": "TopOrder.Of",
+      "url": "api/Graphity.TopOrder.html#Graphity_TopOrder_Of_Graphity_Graph_",
+      "note": "Returns an ImmutableArray<int>, the .NET form of an unmodifiable IntList; it compares by reference, and passes on to a span parameter with .AsSpan()."
+    },
+    "TopOrderAndLevels": {
+      "name": "TopOrderAndLevels",
+      "url": "api/Graphity.TopOrderAndLevels.html"
+    },
+    "TopOrderAndLevels.of(Graph)": {
+      "name": "TopOrderAndLevels.Of",
+      "url": "api/Graphity.TopOrderAndLevels.html#Graphity_TopOrderAndLevels_Of_Graphity_Graph_"
+    },
+    "TopOrderAndLevels.order()": {
+      "name": "TopOrderAndLevels.Order",
+      "url": "api/Graphity.TopOrderAndLevels.html#Graphity_TopOrderAndLevels_Order",
+      "note": "A property, read without parentheses. An ImmutableArray<int>, the .NET form of an unmodifiable IntList; it compares by reference, and passes on to a span parameter with .AsSpan()."
+    },
+    "TopOrderAndLevels.levels()": {
+      "name": "TopOrderAndLevels.Levels",
+      "url": "api/Graphity.TopOrderAndLevels.html#Graphity_TopOrderAndLevels_Levels",
+      "note": "A property, read without parentheses. An ImmutableArray<int>, the .NET form of an unmodifiable IntList; it compares by reference, and passes on to a span parameter with .AsSpan()."
+    },
+    "TopOrderAndLevels.levelOf(int)": {
+      "name": "TopOrderAndLevels.LevelOf",
+      "url": "api/Graphity.TopOrderAndLevels.html#Graphity_TopOrderAndLevels_LevelOf_System_Int32_"
+    },
+    "TopOrderAndLevels.levelCount()": {
+      "name": "TopOrderAndLevels.LevelCount",
+      "url": "api/Graphity.TopOrderAndLevels.html#Graphity_TopOrderAndLevels_LevelCount",
+      "note": "A property, read without parentheses."
+    },
+    "ControlFlow": {
+      "name": "ControlFlow",
+      "url": "api/Graphity.ControlFlow.ControlFlow.html",
+      "note": "A static class that shares its name with its namespace, Graphity.ControlFlow, as in Java; code in another namespace below Graphity writes Graphity.ControlFlow.ControlFlow or a using alias."
+    },
+    "ControlFlow.dominanceFrontiers(Dominators)": {
+      "name": "ControlFlow.DominanceFrontiers",
+      "url": "api/Graphity.ControlFlow.ControlFlow.html#Graphity_ControlFlow_ControlFlow_DominanceFrontiers_Graphity_Dominators_"
+    },
+    "IteratedDominanceFrontier": {
+      "name": "IteratedDominanceFrontier",
+      "url": "api/Graphity.ControlFlow.IteratedDominanceFrontier.html"
+    },
+    "IteratedDominanceFrontier.of(Dominators)": {
+      "name": "IteratedDominanceFrontier.Of",
+      "url": "api/Graphity.ControlFlow.IteratedDominanceFrontier.html#Graphity_ControlFlow_IteratedDominanceFrontier_Of_Graphity_Dominators_"
+    },
+    "IteratedDominanceFrontier.frontierOf(IntList)": {
+      "name": "IteratedDominanceFrontier.FrontierOf",
+      "url": "api/Graphity.ControlFlow.IteratedDominanceFrontier.html#Graphity_ControlFlow_IteratedDominanceFrontier_FrontierOf_System_ReadOnlySpan_System_Int32__",
+      "note": "Takes a ReadOnlySpan<int>: an array, a SortedIntView or a collection expression passes as it is, an ImmutableArray<int> result with .AsSpan()."
+    },
+    "Loops": {
+      "name": "Loops",
+      "url": "api/Graphity.ControlFlow.Loops.html"
+    },
+    "Loops.of(BiAdjacentGraph, int)": {
+      "name": "Loops.Of",
+      "signature": "Loops.Of(BiAdjacentGraph, int)",
+      "url": "api/Graphity.ControlFlow.Loops.html#Graphity_ControlFlow_Loops_Of_Graphity_BiAdjacentGraph_System_Int32_"
+    },
+    "Loops.of(BiAdjacentGraph, IntList)": {
+      "name": "Loops.Of",
+      "signature": "Loops.Of(BiAdjacentGraph, ReadOnlySpan<int>)",
+      "url": "api/Graphity.ControlFlow.Loops.html#Graphity_ControlFlow_Loops_Of_Graphity_BiAdjacentGraph_System_ReadOnlySpan_System_Int32__",
+      "note": "Takes a ReadOnlySpan<int>: an array, a SortedIntView or a collection expression passes as it is, an ImmutableArray<int> result with .AsSpan()."
+    },
+    "Loops.loopCount()": {
+      "name": "Loops.LoopCount",
+      "url": "api/Graphity.ControlFlow.Loops.html#Graphity_ControlFlow_Loops_LoopCount",
+      "note": "A property, read without parentheses."
+    },
+    "Loops.isReducible()": {
+      "name": "Loops.IsReducible",
+      "url": "api/Graphity.ControlFlow.Loops.html#Graphity_ControlFlow_Loops_IsReducible",
+      "note": "A property, read without parentheses."
+    },
+    "Loops.innermostLoopOf(int)": {
+      "name": "Loops.InnermostLoopOf",
+      "url": "api/Graphity.ControlFlow.Loops.html#Graphity_ControlFlow_Loops_InnermostLoopOf_System_Int32_"
+    },
+    "Loops.loopDepthOf(int)": {
+      "name": "Loops.LoopDepthOf",
+      "url": "api/Graphity.ControlFlow.Loops.html#Graphity_ControlFlow_Loops_LoopDepthOf_System_Int32_"
+    },
+    "Loops.isInLoop(int, int)": {
+      "name": "Loops.IsInLoop",
+      "url": "api/Graphity.ControlFlow.Loops.html#Graphity_ControlFlow_Loops_IsInLoop_System_Int32_System_Int32_"
+    },
+    "Loops.headerOf(int)": {
+      "name": "Loops.HeaderOf",
+      "url": "api/Graphity.ControlFlow.Loops.html#Graphity_ControlFlow_Loops_HeaderOf_System_Int32_"
+    },
+    "Loops.entriesOf(int)": {
+      "name": "Loops.EntriesOf",
+      "url": "api/Graphity.ControlFlow.Loops.html#Graphity_ControlFlow_Loops_EntriesOf_System_Int32_"
+    },
+    "Loops.parentOf(int)": {
+      "name": "Loops.ParentOf",
+      "url": "api/Graphity.ControlFlow.Loops.html#Graphity_ControlFlow_Loops_ParentOf_System_Int32_"
+    },
+    "Loops.bodyOf(int)": {
+      "name": "Loops.BodyOf",
+      "url": "api/Graphity.ControlFlow.Loops.html#Graphity_ControlFlow_Loops_BodyOf_System_Int32_",
+      "note": "Returns a ReadOnlySpan<int> over the shared array, in place of a view as an IntList: the compiler keeps it from being written; it cannot be kept in a field, so copy it with ToArray() to keep it."
+    },
+    "AttributeHook": {
+      "name": "AttributeHook",
+      "url": "api/Graphity.Dot.AttributeHook.html",
+      "note": "A delegate in place of the functional interface; a lambda passes as in Java, and gets the attributes as an IDictionary<string, string> in their order of insertion."
+    },
+    "AttributeHook.accept(int, Map)": {
+      "name": "AttributeHook",
+      "url": "api/Graphity.Dot.AttributeHook.html",
+      "note": "The delegate itself: a call of the delegate, hook(id, attributes), takes the place of accept; the attributes are an IDictionary<string, string>."
+    },
+    "DotWriter": {
+      "name": "DotWriter",
+      "url": "api/Graphity.Dot.DotWriter.html"
+    },
+    "DotWriter.of(Graph)": {
+      "name": "DotWriter.Of",
+      "url": "api/Graphity.Dot.DotWriter.html#Graphity_Dot_DotWriter_Of_Graphity_Graph_"
+    },
+    "DotWriter.graphAttribute(String, String)": {
+      "name": "DotWriter.GraphAttribute",
+      "url": "api/Graphity.Dot.DotWriter.html#Graphity_Dot_DotWriter_GraphAttribute_System_String_System_String_"
+    },
+    "DotWriter.nodeLabel(IntFunction)": {
+      "name": "DotWriter.NodeLabel",
+      "url": "api/Graphity.Dot.DotWriter.html#Graphity_Dot_DotWriter_NodeLabel_System_Func_System_Int32_System_String__",
+      "note": "The label function is a Func<int, string?>, a lambda as in Java."
+    },
+    "DotWriter.edgeLabel(IntFunction)": {
+      "name": "DotWriter.EdgeLabel",
+      "url": "api/Graphity.Dot.DotWriter.html#Graphity_Dot_DotWriter_EdgeLabel_System_Func_System_Int32_System_String__",
+      "note": "The label function is a Func<int, string?>, a lambda as in Java."
+    },
+    "DotWriter.nodeAttributes(AttributeHook)": {
+      "name": "DotWriter.NodeAttributes",
+      "url": "api/Graphity.Dot.DotWriter.html#Graphity_Dot_DotWriter_NodeAttributes_Graphity_Dot_AttributeHook_",
+      "note": "The hook is the delegate AttributeHook, a lambda as in Java, that gets the attributes as an IDictionary<string, string>."
+    },
+    "DotWriter.edgeAttributes(AttributeHook)": {
+      "name": "DotWriter.EdgeAttributes",
+      "url": "api/Graphity.Dot.DotWriter.html#Graphity_Dot_DotWriter_EdgeAttributes_Graphity_Dot_AttributeHook_",
+      "note": "The hook is the delegate AttributeHook, a lambda as in Java, that gets the attributes as an IDictionary<string, string>."
+    },
+    "DotWriter.clusters(NodePartition, IntFunction)": {
+      "name": "DotWriter.Clusters",
+      "url": "api/Graphity.Dot.DotWriter.html#Graphity_Dot_DotWriter_Clusters_Graphity_NodePartition_System_Func_System_Int32_System_String__",
+      "note": "The label function is a Func<int, string?>, a lambda as in Java."
+    },
+    "DotWriter.nodeFilter(IntPredicate)": {
+      "name": "DotWriter.NodeFilter",
+      "url": "api/Graphity.Dot.DotWriter.html#Graphity_Dot_DotWriter_NodeFilter_System_Func_System_Int32_System_Boolean__",
+      "note": "The filter is a Func<int, bool>, a lambda as in Java."
+    },
+    "DotWriter.undirected()": {
+      "name": "DotWriter.Undirected",
+      "url": "api/Graphity.Dot.DotWriter.html#Graphity_Dot_DotWriter_Undirected"
+    },
+    "DotWriter.write(Appendable)": {
+      "name": "DotWriter.Write",
+      "url": "api/Graphity.Dot.DotWriter.html#Graphity_Dot_DotWriter_Write_System_IO_TextWriter_",
+      "note": "Writes to a TextWriter, in place of an Appendable: a StringWriter, a StreamWriter or Console.Out; it throws the writer's IOException."
+    },
+    "DotWriter.writeToString()": {
+      "name": "DotWriter.WriteToString",
+      "url": "api/Graphity.Dot.DotWriter.html#Graphity_Dot_DotWriter_WriteToString"
+    },
+    "MermaidWriter": {
+      "name": "MermaidWriter",
+      "url": "api/Graphity.Mermaid.MermaidWriter.html"
+    },
+    "MermaidWriter.of(Graph)": {
+      "name": "MermaidWriter.Of",
+      "url": "api/Graphity.Mermaid.MermaidWriter.html#Graphity_Mermaid_MermaidWriter_Of_Graphity_Graph_"
+    },
+    "MermaidWriter.direction(Direction)": {
+      "name": "MermaidWriter.Direction",
+      "url": "api/Graphity.Mermaid.MermaidWriter.html#Graphity_Mermaid_MermaidWriter_Direction_Graphity_Mermaid_MermaidDirection_",
+      "note": "Takes a MermaidDirection, the enum beside the writer that takes the place of MermaidWriter.Direction."
+    },
+    "MermaidWriter.nodeLabel(IntFunction)": {
+      "name": "MermaidWriter.NodeLabel",
+      "url": "api/Graphity.Mermaid.MermaidWriter.html#Graphity_Mermaid_MermaidWriter_NodeLabel_System_Func_System_Int32_System_String__",
+      "note": "The label function is a Func<int, string?>, a lambda as in Java."
+    },
+    "MermaidWriter.edgeLabel(IntFunction)": {
+      "name": "MermaidWriter.EdgeLabel",
+      "url": "api/Graphity.Mermaid.MermaidWriter.html#Graphity_Mermaid_MermaidWriter_EdgeLabel_System_Func_System_Int32_System_String__",
+      "note": "The label function is a Func<int, string?>, a lambda as in Java."
+    },
+    "MermaidWriter.nodeShape(IntFunction)": {
+      "name": "MermaidWriter.NodeShape",
+      "url": "api/Graphity.Mermaid.MermaidWriter.html#Graphity_Mermaid_MermaidWriter_NodeShape_System_Func_System_Int32_System_Nullable_Graphity_Mermaid_MermaidWriter_Shape___",
+      "note": "The shape function is a Func<int, MermaidWriter.Shape?>, a lambda as in Java."
+    },
+    "MermaidWriter.classDef(String, String)": {
+      "name": "MermaidWriter.ClassDef",
+      "url": "api/Graphity.Mermaid.MermaidWriter.html#Graphity_Mermaid_MermaidWriter_ClassDef_System_String_System_String_"
+    },
+    "MermaidWriter.nodeClass(IntFunction)": {
+      "name": "MermaidWriter.NodeClass",
+      "url": "api/Graphity.Mermaid.MermaidWriter.html#Graphity_Mermaid_MermaidWriter_NodeClass_System_Func_System_Int32_System_String__",
+      "note": "The class function is a Func<int, string?>, a lambda as in Java."
+    },
+    "MermaidWriter.edgeStyle(IntFunction)": {
+      "name": "MermaidWriter.EdgeStyle",
+      "url": "api/Graphity.Mermaid.MermaidWriter.html#Graphity_Mermaid_MermaidWriter_EdgeStyle_System_Func_System_Int32_System_String__",
+      "note": "The style function is a Func<int, string?>, a lambda as in Java."
+    },
+    "MermaidWriter.clusters(NodePartition, IntFunction)": {
+      "name": "MermaidWriter.Clusters",
+      "url": "api/Graphity.Mermaid.MermaidWriter.html#Graphity_Mermaid_MermaidWriter_Clusters_Graphity_NodePartition_System_Func_System_Int32_System_String__",
+      "note": "The label function is a Func<int, string?>, a lambda as in Java."
+    },
+    "MermaidWriter.nodeFilter(IntPredicate)": {
+      "name": "MermaidWriter.NodeFilter",
+      "url": "api/Graphity.Mermaid.MermaidWriter.html#Graphity_Mermaid_MermaidWriter_NodeFilter_System_Func_System_Int32_System_Boolean__",
+      "note": "The filter is a Func<int, bool>, a lambda as in Java."
+    },
+    "MermaidWriter.undirected()": {
+      "name": "MermaidWriter.Undirected",
+      "url": "api/Graphity.Mermaid.MermaidWriter.html#Graphity_Mermaid_MermaidWriter_Undirected"
+    },
+    "MermaidWriter.write(Appendable)": {
+      "name": "MermaidWriter.Write",
+      "url": "api/Graphity.Mermaid.MermaidWriter.html#Graphity_Mermaid_MermaidWriter_Write_System_IO_TextWriter_",
+      "note": "Writes to a TextWriter, in place of an Appendable: a StringWriter, a StreamWriter or Console.Out; it throws the writer's IOException."
+    },
+    "MermaidWriter.writeToString()": {
+      "name": "MermaidWriter.WriteToString",
+      "url": "api/Graphity.Mermaid.MermaidWriter.html#Graphity_Mermaid_MermaidWriter_WriteToString"
+    },
+    "MermaidWriter.Direction": {
+      "name": "MermaidDirection",
+      "url": "api/Graphity.Mermaid.MermaidDirection.html",
+      "note": "An enum beside the writer, not nested in it: C# allows no nested type beside the method Direction of the same name. Its members in PascalCase: LeftRight for LEFT_RIGHT."
+    },
+    "MermaidWriter.Shape": {
+      "name": "MermaidWriter.Shape",
+      "url": "api/Graphity.Mermaid.MermaidWriter.Shape.html",
+      "note": "An enum nested as in Java, its members in PascalCase: Stadium for STADIUM, DoubleCircle for DOUBLE_CIRCLE."
+    }
+  }
+}

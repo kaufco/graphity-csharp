@@ -1,0 +1,4 @@
+/* The name of the library stands in the navigation bar without a logo, as on the other API sites. */
+#logo {
+  display: none;
+}

@@ -1,0 +1,8 @@
+# Line feeds in the working tree on every platform: the tests compare the DOT and Mermaid text,
+# which the writers end with line feeds, with raw string literals in the test sources.
+* text=auto eol=lf
+
+# Binary test data.
+*.gphy binary
+*.i32 binary
+*.u8 binary

@@ -1,0 +1,124 @@
+# Builds the API documentation of the packages with code - Graphity.Core, Graphity.ControlFlow,
+# Graphity.Dot and Graphity.Mermaid - with DocFX and deploys it to GitHub Pages, so links and the
+# README badge keep a single target however many packages there are.
+#
+# The job is guarded with `if: github.repository == 'kaufco/graphity-csharp'` so that
+# forks don't attempt a Pages deploy they have neither the settings nor the
+# permissions for.
+#
+# Two triggers:
+#   * release.published — automatic run. The NuGet upload (release.yml) runs by
+#     hand before the release, so that a rejected package stops the release;
+#     this workflow follows the release. Only `published`, not
+#     `released`/`edited`: a later correction of the release notes must not
+#     redeploy. Deliberately not on push.tags as well — a release created from
+#     a new tag would fire both triggers.
+#   * workflow_dispatch — manual run, to populate
+#     https://kaufco.github.io/graphity-csharp/ from main HEAD before the first
+#     release, so the page is not blank, and as the fallback when a release
+#     already exists.
+#
+# Under each type and member that a page of the guide uses, the deployed documentation links
+# those pages. The guide (kaufco/graphity-doc) publishes the list as api-pages.json, and
+# .github/scripts/add-guide-links.mjs adds the links to the generated pages: only the
+# deployed site depends on the guide, not the sources. The links are those of the guide
+# at the time of the run; if the list cannot be read, the documentation goes out without
+# them.
+#
+# The published site is the release's snapshot at Pages root, with the version
+# of the packages (src/Directory.Build.props) next to the name in the
+# navigation bar; a versioned layout (/<version>/, /latest/) can be introduced
+# later without changing the trigger model.
+#
+# Two repository settings are prerequisites:
+#   * GitHub Pages source must be "GitHub Actions" — this workflow uses
+#     actions/deploy-pages, not a gh-pages branch.
+#   * The `github-pages` environment must allow tag deployments. By default it
+#     permits the default branch only, and a release run stands in the tag's
+#     ref, so it is rejected with "Tag X.Y.Z is not allowed to deploy to
+#     github-pages due to environment protection rules". Add a tag rule under
+#     Deployment branches and tags; until then, dispatch manually from main.
+
+name: Deploy API documentation
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Pages allows only one concurrent deployment. Don't cancel an in-flight
+# deploy — let it finish so we never leave Pages in a half-updated state.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build & deploy API documentation
+    if: github.repository == 'kaufco/graphity-csharp'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    env:
+      DOTNET_NOLOGO: 'true'
+      DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # On a release event this is the tag; a manual run takes the branch
+          # it was started from.
+          ref: ${{ github.event.release.tag_name || github.ref }}
+
+      - name: Set up .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Build the API documentation
+        # DocFX at the version that dotnet-tools.json pins, over the four
+        # packages listed in docs/docfx.json, into docs/api; --warningsAsErrors
+        # makes every DocFX warning, such as a reference that leads nowhere,
+        # fail this job. The version is the one all packages share, read from
+        # src/Directory.Build.props rather than from the tag, so that a manual
+        # run from main shows the version main is at.
+        run: |
+          set -euo pipefail
+          version="$(sed -n 's:.*<Version>\(.*\)</Version>.*:\1:p' src/Directory.Build.props)"
+          if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+            echo "src/Directory.Build.props has the version '$version', not a release version." >&2
+            exit 1
+          fi
+          dotnet tool restore
+          dotnet docfx docs/docfx.json --warningsAsErrors --metadata _appName="Graphity for .NET $version"
+
+      - name: Link the types and members to the guide
+        run: |
+          set -euo pipefail
+          list=https://kaufco.github.io/graphity-doc/api-pages.json
+          if curl -fsSL --retry 3 --max-time 30 -o "$RUNNER_TEMP/api-pages.json" "$list"; then
+            node .github/scripts/add-guide-links.mjs docs/api "$RUNNER_TEMP/api-pages.json"
+          else
+            echo "::warning::$list could not be read; the API documentation has no links to the guide."
+          fi
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload API documentation artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/api
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

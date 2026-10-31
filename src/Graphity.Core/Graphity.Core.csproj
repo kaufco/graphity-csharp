@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Graphity</RootNamespace>
+    <PackageId>Graphity.Core</PackageId>
+    <Description>Graphity's core: a compact, immutable directed graph and the algorithms on it - components, orders, traversals, dominators, mappings and partitions.</Description>
+    <PackageTags>graph;graph-algorithms;csr;scc;dominators;topological-sort</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Java's package-private members are internal; only the core's tests see them. The modules use the public API only. -->
+    <InternalsVisibleTo Include="Graphity.Core.Tests" />
+  </ItemGroup>
+
+</Project>

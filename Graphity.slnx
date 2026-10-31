@@ -1,0 +1,20 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Graphity.Core/Graphity.Core.csproj" />
+    <Project Path="src/Graphity.ControlFlow/Graphity.ControlFlow.csproj" />
+    <Project Path="src/Graphity.Dot/Graphity.Dot.csproj" />
+    <Project Path="src/Graphity.Mermaid/Graphity.Mermaid.csproj" />
+    <Project Path="src/Graphity.All/Graphity.All.csproj" />
+  </Folder>
+  <Folder Name="/examples/">
+    <Project Path="examples/Graphity.Examples/Graphity.Examples.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Graphity.Core.Tests/Graphity.Core.Tests.csproj" />
+    <Project Path="tests/Graphity.ControlFlow.Tests/Graphity.ControlFlow.Tests.csproj" />
+    <Project Path="tests/Graphity.Dot.Tests/Graphity.Dot.Tests.csproj" />
+    <Project Path="tests/Graphity.Mermaid.Tests/Graphity.Mermaid.Tests.csproj" />
+    <Project Path="tests/Graphity.Examples.Tests/Graphity.Examples.Tests.csproj" />
+    <Project Path="tests/Graphity.TestUtils/Graphity.TestUtils.csproj" />
+  </Folder>
+</Solution>

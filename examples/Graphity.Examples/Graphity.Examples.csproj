@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    The examples of the XML documentation, of the package overviews and of the README, and in Guide/
+    the examples of the guide, each in the file and region that the guide shows: the counterpart of
+    the Java module graphity-examples. The build compiles them, and the tests in
+    tests/Graphity.Examples.Tests check what their comments claim. Not part of the released library:
+    never packed.
+
+    The namespace Examples lies outside Graphity on purpose: the examples are written as code that
+    uses the library, so they need the using directives that such code needs, and they name the
+    class Graphity.ControlFlow.ControlFlow as ControlFlow, which a namespace below Graphity cannot.
+  -->
+  <PropertyGroup>
+    <RootNamespace>Examples</RootNamespace>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Most examples are internal, as they are package-private in Java; their tests call them. -->
+    <InternalsVisibleTo Include="Graphity.Examples.Tests" />
+    <ProjectReference Include="../../src/Graphity.Core/Graphity.Core.csproj" />
+    <ProjectReference Include="../../src/Graphity.ControlFlow/Graphity.ControlFlow.csproj" />
+    <ProjectReference Include="../../src/Graphity.Dot/Graphity.Dot.csproj" />
+    <ProjectReference Include="../../src/Graphity.Mermaid/Graphity.Mermaid.csproj" />
+  </ItemGroup>
+
+</Project>

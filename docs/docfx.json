@@ -1,0 +1,58 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dotnet/docfx/main/schemas/docfx.schema.json",
+  "metadata": [
+    {
+      "src": [
+        {
+          "src": "../src",
+          "files": [
+            "Graphity.Core/Graphity.Core.csproj",
+            "Graphity.ControlFlow/Graphity.ControlFlow.csproj",
+            "Graphity.Dot/Graphity.Dot.csproj",
+            "Graphity.Mermaid/Graphity.Mermaid.csproj"
+          ]
+        }
+      ],
+      "dest": "obj/api",
+      "properties": {
+        "Configuration": "Release"
+      },
+      "namespaceLayout": "flattened",
+      "memberLayout": "samePage",
+      "enumSortOrder": "declaringOrder"
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "src": "obj/api",
+        "files": [ "**/*.yml" ],
+        "dest": "api"
+      },
+      {
+        "files": [ "index.md", "toc.yml" ]
+      }
+    ],
+    "overwrite": [
+      {
+        "files": [ "namespaces/*.md" ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [ "logo.svg" ]
+      }
+    ],
+    "output": "api",
+    "template": [ "default", "modern", "template" ],
+    "globalMetadata": {
+      "_appName": "Graphity for .NET",
+      "_appTitle": "Graphity for .NET",
+      "_appFaviconPath": "logo.svg",
+      "_appFooter": "Copyright 2025–2026 Marco Kaufmann. Apache License 2.0.",
+      "_enableSearch": true,
+      "_disableContribution": true
+    },
+    "disableGitFeatures": true
+  }
+}

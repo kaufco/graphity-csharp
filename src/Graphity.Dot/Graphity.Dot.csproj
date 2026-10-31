@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Graphity.Dot</RootNamespace>
+    <PackageId>Graphity.Dot</PackageId>
+    <Description>Export of Graphity graphs to DOT (the language of Graphviz).</Description>
+    <PackageTags>graph;dot;graphviz;visualization</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Graphity.Dot.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Graphity.Core/Graphity.Core.csproj" />
+  </ItemGroup>
+
+</Project>

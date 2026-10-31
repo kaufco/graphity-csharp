@@ -1,0 +1,96 @@
+# Continuous integration on every push to main and on every pull request: build, test and pack
+# with the .NET 10 SDK, on Linux, Windows and macOS. The build treats every compiler and analyzer
+# warning as an error, so it is the lint as well, together with the check of the formatting. What
+# the tests do not need - the API documentation - is built at the same time, in a job of its own,
+# which then checks the urls of the API mapping of the guide against it.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Cancel superseded runs for the same ref (e.g. force-pushes to a PR branch) to
+# save Action minutes and keep the queue snappy.
+concurrency:
+  group: csharp-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build and test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    env:
+      DOTNET_NOLOGO: 'true'
+      DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Build
+        # Compiles the packages and the tests; warnings are errors (Directory.Build.props).
+        run: dotnet build -c Release
+
+      - name: Check formatting
+        # Whitespace and code style as dotnet format applies them; the analyzers ran in the build.
+        if: runner.os == 'Linux'
+        run: dotnet format Graphity.slnx whitespace --verify-no-changes && dotnet format Graphity.slnx style --verify-no-changes --no-restore
+
+      - name: Test
+        run: dotnet test -c Release --no-build
+
+      - name: Pack
+        # Checks that the packages build, the one without code included; they are not published.
+        run: dotnet pack -c Release --no-build -o artifacts
+
+  api-docs:
+    name: API documentation
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    env:
+      DOTNET_NOLOGO: 'true'
+      DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Build the API documentation
+        # DocFX at the version that dotnet-tools.json pins builds the packages with code, reads their
+        # XML documentation and writes the site to docs/api, as deploy-api-docs.yml does for a
+        # release. A warning of DocFX, such as a reference that leads nowhere, fails the run; the
+        # compiler has checked the XML documentation itself in the build.
+        run: |
+          dotnet tool restore
+          dotnet docfx docs/docfx.json --warningsAsErrors
+
+      - name: Check the API mapping against the API documentation
+        # The guide links the names of the Java API through examples/api-csharp.json to this site:
+        # each url must lead to a page and an anchor of it, and each signature must be the one the
+        # site shows there. The build job skips these tests, as it has no site to check against;
+        # here, GRAPHITY_REQUIRE_API_DOCS makes a missing site fail them.
+        env:
+          GRAPHITY_REQUIRE_API_DOCS: 'true'
+        run: dotnet test tests/Graphity.Examples.Tests -c Release --filter "FullyQualifiedName~Examples.Tests.ApiMappingTests"

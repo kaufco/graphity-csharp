@@ -1,0 +1,4 @@
+# The navigation bar: the overview (index.md) is the home page, and the API lists the namespaces
+# with their types, from the metadata that DocFX extracts into obj/api.
+- name: API
+  href: obj/api/

@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Shared test utilities, the counterpart of the testutils of graphity-core: generators, oracles and recording traversers. -->
+  <PropertyGroup>
+    <RootNamespace>Graphity.TestUtils</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>false</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Graphity.Core/Graphity.Core.csproj" />
+  </ItemGroup>
+
+</Project>

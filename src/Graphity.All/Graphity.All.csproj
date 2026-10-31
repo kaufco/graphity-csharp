@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    The whole library in one package, the counterpart of the Java artifact graphity: Graphity.Core,
+    Graphity.ControlFlow, Graphity.Dot and Graphity.Mermaid at the version of this package. It has no
+    code of its own; the project references below become its package dependencies. The ID
+    Graphity on NuGet belongs to an unrelated project, hence the suffix.
+  -->
+  <PropertyGroup>
+    <PackageId>Graphity.All</PackageId>
+    <Description>Graphity, the whole library: the core with its graph and algorithms, the control-flow analyses, and export to DOT and Mermaid.</Description>
+    <PackageTags>graph;graph-algorithms;csr;scc;dominators;control-flow;dot;mermaid</PackageTags>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <!-- A package without assemblies, on purpose, and so without symbols. -->
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+    <IncludeSymbols>false</IncludeSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Graphity.Core/Graphity.Core.csproj" />
+    <ProjectReference Include="../Graphity.ControlFlow/Graphity.ControlFlow.csproj" />
+    <ProjectReference Include="../Graphity.Dot/Graphity.Dot.csproj" />
+    <ProjectReference Include="../Graphity.Mermaid/Graphity.Mermaid.csproj" />
+  </ItemGroup>
+
+</Project>
