@@ -9,7 +9,7 @@ same features as in [Graphity](https://github.com/kaufco/graphity) for Java.
 
 ---
 
-## [3.0.0] — unreleased
+## [3.0.0] — 2026-11-01
 
 This is the first release of Graphity in C#. It implements the API of Graphity 3.0.0 for Java in
 the conventions of .NET: the same packages, types and methods, the same algorithms and data
